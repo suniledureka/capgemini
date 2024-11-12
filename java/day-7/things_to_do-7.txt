@@ -18,6 +18,7 @@ CCE_1002   Praveen
 CCE_1003   Mark
     
 4. Abstraction - Abstract class
+
 Design a Drawing Application with Rectangle, Circle, Triangle
 
 which shape do you want to use with? [1. Rect | 2. Circle | 3. Triangle]: 1
@@ -35,10 +36,9 @@ color of Rectangle is changed to xxxxx
 area of Rectangle = xx
 
 
+5. strictfp modifier
 
-
-
-
+6. Enhancements to Interfaces in Java 8, 9
 
 
 
