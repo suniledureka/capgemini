@@ -1,8 +1,0 @@
-1. Chained Exception
-2. Closeable Vs AutoCloseable
-3. Apache POI   - refer later
-4. PrintStream, PrintWriter, RandomAccessFile
-5. java.nio package - non-blocking input output
-
-4. collections - Map, List, Set, RegExp, Exception Handling, String 
-
