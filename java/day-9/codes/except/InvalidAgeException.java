@@ -3,11 +3,14 @@ package com.capgemini.java.except;
 public class InvalidAgeException extends RuntimeException {
 
 	public InvalidAgeException() {
-		super();		
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public InvalidAgeException(String message) {
-		super(message);		
+		super(message);
+		// TODO Auto-generated constructor stub
 	}
+
 	
 }

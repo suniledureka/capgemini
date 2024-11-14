@@ -1,7 +1,0 @@
-1. Wrapper classes
-2. autoboxing Vs auto-unboxing
-3. widening beats boxing
-4. checked exception Vs un-checked exceptions
-5. Exception Vs Error
-6. Custom Exception
-
