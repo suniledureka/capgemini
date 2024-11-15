@@ -1,0 +1,11 @@
+1. Object Graphs
+2. Class Diagram
+3. private static final long serialVersionUID = 1L;
+4. Serialization Vs Deserialization
+5. Externalization in Java - java.io.Externalizable
+
+6. java.io.RandomAccessFile 
+---------------------------------------------------
+7. Enumeration Vs Iterator
+8. Iterator Vs ListIterator
+

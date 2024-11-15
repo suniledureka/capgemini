@@ -1,0 +1,5 @@
+A programming language is used to communicate wiith computer.
+Java is a high level programming language.
+Java programs are platform independent.
+A hardware or software on top of which a program runs is known as platform.
+Thank You!!.
