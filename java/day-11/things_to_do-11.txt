@@ -8,5 +8,15 @@
 
 6. HashSet Vs TreeSet
 7. Internal Architecture of HashSet, HashMap etc
+=====================================================
+
+1. java.util.SortedSet methods 
+2. java.util.NavigableSet methods  (lower(), floor(), ceiling(), higher(), pollFirst(), pollLast(), descendingSet() etc
+
+3. HashSet Vs TreeSet
+
+
+
+
 
 
