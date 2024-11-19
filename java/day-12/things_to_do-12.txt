@@ -1,0 +1,20 @@
+1. Internal Architecture of HashMap or Internal Working of HashMap
+
+2. IdentityHashMap
+
+3. WeakHashMap
+
+4. java.util.Properties
+
+5. Fail-Fast & Fail-Safe Iterators
+
+6. Concurrent Collections
+
+7. java.util.Date  & java.util.Calendar , java.text.SimpleDateFormat 
+
+8. Type Inference in Java
+
+9. pre-defined functional interfaces in Java 8 - Consumer, Predicate, Supplier, Function, BiConsumer, BiPredicate etc
+
+10. Predicate Joins
+
