@@ -1,4 +1,4 @@
-package com.capgemini.java.lambdas;
+package com.capgemini.java.util.streams;
 
 public class Book {
 	private Integer bookId;

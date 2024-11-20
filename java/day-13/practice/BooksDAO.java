@@ -1,4 +1,4 @@
-package com.capgemini.java.lambdas;
+package com.capgemini.java.util.streams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,8 @@ public class BooksDAO {
 		books.add(new Book(123, "Angular Reference", 220.5f));
 		books.add(new Book(224, "Spring Reference", 745f));
 		books.add(new Book(462, "Microservice Reference", 950f));
+		books.add(new Book(123, "Vue JS", 220.5f));
+		books.add(new Book(123, "Sample Book", 220.5f));
 		
 		return books;
 	}
