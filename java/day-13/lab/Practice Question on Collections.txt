@@ -1,0 +1,53 @@
+model class:- (Product)
+----------------
+Create a Product class with the following fields:
+String id (Product ID)
+String name (Product Name)
+double price (Product Price)
+int quantity (Product Quantity)
+Include appropriate getters, setters, and a parameterized constructor.
+
+
+ProductService:-
+---------------
+methods:-
+-----------
+String addProduct(Product product)
+Optional<Product> findProductById(String id)
+Map<String, Integer> getProductQuantities(List<Product> products)
+List<Product> filterProductsByName(String regex, List<Product> products)
+String updateProductPrice(String id, double newPrice)  
+
+methods description:-
+----------------------
+addProduct: Adds a product after validating the name field against a specific regex pattern. Throw a custom exception if the validation fails.
+
+findProductById: Searches for a product by id in a list of products and returns it as an Optional.
+
+getProductQuantities: Takes a list of products and returns a Map with product names as keys and quantities as values.
+
+filterProductsByName: Uses a regex pattern to filter products by name, returning a list of matching products.
+
+updateProductPrice: Updates the price of a product by id. If the id is not found, throw a custom exception.
+
+
+
+Exception:-
+----------- 
+Custom Exception
+
+Define a custom exception ProductNameInvalidException to handle validation errors (e.g., invalid product name) and missing products. 
+   
+
+Regex Validation
+------------------
+Validate the product name using a regex pattern (e.g., the name should contain only letters and be 3-20 characters long). If the name does not meet the criteria, throw ProductNameInvalidException.
+
+
+3. user Interface:-
+------------------- 
+ menu driven program to  call all the methods and test it. 
+
+Input Format: The Product fields may be provided as a single string in the format: "id/name/price/quantity". Parse this string to create a Product object.
+
+===================================================================================
