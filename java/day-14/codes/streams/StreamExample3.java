@@ -30,9 +30,18 @@ public class StreamExample3 {
 		
 		//Book bk = books.stream().filter(book -> book.getBookTitle().toLowerCase().indexOf(searchString.toLowerCase()) >= 0).findAny().orElseThrow(() -> new RuntimeException("no book found!"));
 		
-		Book bk = books.stream().filter(book -> book.getBookTitle().contains(searchString)).findAny().orElseThrow(() -> new RuntimeException("no book found!"));
-
+		//Book bk = books.stream().filter(book -> book.getBookTitle().contains(searchString)).findAny().orElseThrow(() -> new RuntimeException("no book found!"));
+		
+		Book bk = books.stream().filter(book -> book.getBookTitle().toLowerCase().indexOf(searchString.toLowerCase()) > -1).findFirst().orElseGet(() -> new Book());
 		System.out.println(bk);
+		
+		Optional<Book> bok = Optional.ofNullable(books.stream().filter(book -> book.getBookTitle().toLowerCase().indexOf(searchString.toLowerCase()) > -1).findFirst().orElseGet(() -> new Book()));
+		if(bok.isPresent()) {
+			System.out.println(bok.get());
+		}
+		else {
+			System.out.println("no matching book");
+		}
 	}
 
 }

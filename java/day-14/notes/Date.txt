@@ -1,0 +1,197 @@
+to read date from keyboard
+
+LocalDate date = LocalDate.parse("20150131", DateTimeFormatter.BASIC_ISO_DATE); 
+System.out.println(date);
+
+LocalDate date = LocalDate.parse("2015-01-30", DateTimeFormatter.ISO_DATE); 
+System.out.println(date);
+
+
+----------------------------------------------------------------
+SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+String date = sdf.format(new Date());
+
+y   = year   (yy or yyyy)
+M   = month  (MM)
+d   = day in month (dd)
+h   = hour (0-12)  (hh)
+H   = hour (0-23)  (HH)
+m   = minute in hour (mm)
+s   = seconds (ss)
+S   = milliseconds (SSS)
+z   = time zone  text        (e.g. Pacific Standard Time...)
+Z   = time zone, time offset (e.g. -0800)
+
+yyyy-MM-dd (ISO)	"2018-07-14"
+dd-MMM-yyyy		"14-Jul-2018"
+dd/MM/yyyy		"14/07/2018"
+E, MMM dd yyyy		"Sat, Jul 14 2018"
+h:mm a			"12:08 PM"
+
+EEEE, MMM dd, yyyy HH:mm:ss a	"Saturday, Jul 14, 2018 14:31:06 PM"
+yyyy-MM-dd'T'HH:mm:ssZ		"2018-07-14T14:31:30+0530"
+hh 'o''clock' a, zzzz		"12 o’clock PM, Pacific Daylight Time"
+K:mm a, z			"0:08 PM, PDT"
+
+
+SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+String dateInString = "15-10-2020 10:20:56";
+Date date = sdf.parse(dateInString);
+
+
+For reference, in java 8, we can use LocalDate class.
+
+LocalDate today = LocalDate.now();
+System.out.println("Today's Local date : " + today);
+
+LocalTime time = LocalTime.now();
+System.out.println("local time now : " + time);
+
+
+Calendar calendar = Calendar.getInstance();
+Date date =  calendar.getTime();
+
+Converting Date to Calendar
+
+SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+String dateInString = "27-04-2016 10:22:56";
+Date date = sdf.parse(dateInString);
+
+Calendar calendar = Calendar.getInstance();
+calendar.setTime(date);
+
+
+Comparing Two Dates
+
+Java program to compare two Date instances using the compareTo() method.
+
+Date date1 = new Date();
+Date date2 = new Date();
+
+int comparison = date1.compareTo(date2);
+
+The compareTo() method returns:
+
+    An int larger than 0 if the date the method is called on is later than the date given as parameter.
+    An int value of 0 if the dates are equal.
+    An int value less than 0 if the date the method is called on is earlier than the date given as parameter.
+
+
+Extracting Days, Months and Years
+
+Calendar calendar = new GregorianCalendar();
+
+int year       = calendar.get(Calendar.YEAR);
+int month      = calendar.get(Calendar.MONTH);
+int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH); // Jan = 0, not 1
+int dayOfWeek  = calendar.get(Calendar.DAY_OF_WEEK);
+int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
+int weekOfMonth= calendar.get(Calendar.WEEK_OF_MONTH);
+
+int hour       = calendar.get(Calendar.HOUR);        // 12 hour clock
+int hourOfDay  = calendar.get(Calendar.HOUR_OF_DAY); // 24 hour clock
+int minute     = calendar.get(Calendar.MINUTE);
+int second     = calendar.get(Calendar.SECOND);
+int millisecond= calendar.get(Calendar.MILLISECOND);
+
+FYI, in Java 8, we can get different time units in the below fashion.
+
+LocalDate today = LocalDate.now();
+int year = today.getYear();
+int month = today.getMonthValue();
+int day = today.getDayOfMonth();
+
+
+
+Date date = new Date();
+SimpleDateFormat DateFor = new SimpleDateFormat("MM/dd/yyyy");
+String stringDate = DateFor.format(date);
+System.out.println("Date Format with MM/dd/yyyy : "+stringDate);
+DateFor = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+stringDate = DateFor.format(date);
+System.out.println("Date Format with dd-M-yyyy hh:mm:ss : "+stringDate);
+DateFor = new SimpleDateFormat("dd MMMM yyyy");
+stringDate = DateFor.format(date);
+System.out.println("Date Format with dd MMMM yyyy : "+stringDate);
+DateFor = new SimpleDateFormat("dd MMMM yyyy zzzz");
+stringDate = DateFor.format(date);
+System.out.println("Date Format with dd MMMM yyyy zzzz : "+stringDate);
+DateFor = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");
+stringDate = DateFor.format(date);
+System.out.println("Date Format with E, dd MMM yyyy HH:mm:ss z :"+stringDate);
+
+
+---------------------------------------------------------------------
+
+LocalDateTime now = LocalDateTime.now();
+
+System.out.println("Before : " + now);
+
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+String formatDateTime = now.format(formatter);
+
+System.out.println("After : " + formatDateTime);
+
+---------------------------------------------------------------------
+
+String now = "2020-11-09 10:30";
+
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+LocalDateTime formatDateTime = LocalDateTime.parse(now, formatter);
+
+System.out.println("Before : " + now);
+
+System.out.println("After : " + formatDateTime);
+
+System.out.println("After : " + formatDateTime.format(formatter));
+------------------------------------------------------------------------
+        Date date1=null;
+        Scanner input = new Scanner(System.in);
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("Enter check-in date (gg/aa/yy):");
+        String cinput = input.nextLine();
+        if(null != cinput && cinput.trim().length() > 0){
+             date1 = format.parse(cinput);
+        }
+        
+        System.out.print(format.format(date1)); 
+-----------------------------------------------------------------------
+
+Days Difference
+
+java.time.temporal.ChronoUnit
+java.time.format.DateTimeFormatter
+
+String date1 = "01-Jan-2017";
+String date2 = "02-Feb-2017";
+
+DateTimeFormatter df = DateTimeFormatter.ofPattern("sd-MMM-yyyy");
+LocalDate  d1 = LocalDate.parse(date1, df);
+LocalDate  d2 = LocalDate.parse(date2, df);
+
+Long datediff = ChronoUnit.DAYS.between(d1,d2);  
+System.out.println(datediff);
+-----------------------------------------------------------------------
+to read date from keyboard
+
+LocalDate date = LocalDate.parse("20150131", DateTimeFormatter.BASIC_ISO_DATE); 
+System.out.println(date);
+
+LocalDate date = LocalDate.parse("2015-01-30", DateTimeFormatter.ISO_DATE); 
+System.out.println(date);
+-----------------------------------------------------------------------
+
+=> to read Date using Scanner
+
+import java.text.SimpleDateFormat;
+public void readDate() throws Exception{
+    String dateFormat = "dd/MM/yyyy";
+    Scanner scanner = new Scanner(System.in);
+    setDate(new SimpleDateFormat(dateFormat).parse(scanner.nextLine()));
+}
+public void setDate(Date date){
+    // do stuff
+}
+
