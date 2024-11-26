@@ -1,0 +1,139 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+enum ActionEnum {
+    appliedFilter,
+    feature1Button,
+    feature2Button,
+    feature3Button,
+    proceedButton
+}
+
+interface IAnalytics {
+    public void registerAction(ActionEnum action);
+	public int getNumberOfActionRegisteredButNotSentToAnalyticsStore();
+	public int getTotalNumberOfLoggedActions();
+    public List<ActionEnum> getMostFrequentlyUsedActions();
+}
+
+interface IAnalyticsStore {
+    public void storeActions(Queue<ActionEnum> q);
+    public Queue<ActionEnum> getAllStoredActions();
+}
+class Analytics implements IAnalytics {
+    private IAnalyticsStore analyticsStore;
+    private int K;
+    public Analytics(IAnalyticsStore analyticsStore, int K) {
+        
+        
+    }
+    
+
+    @Override
+    public void registerAction(ActionEnum action) {
+        
+        
+    }
+
+    @Override
+    public int getNumberOfActionRegisteredButNotSentToAnalyticsStore() {
+        
+    }
+
+    @Override
+    public int getTotalNumberOfLoggedActions() {
+        
+    }
+
+    @Override
+    public List<ActionEnum> getMostFrequentlyUsedActions() {
+        
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter out = new PrintWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+        
+        String inp[];
+        inp = br.readLine().split(" ");
+
+        int totalNumberOfRequests = Integer.parseInt(inp[0]),
+            K = Integer.parseInt(inp[1]);
+        
+        IAnalyticsStore analyticsStore = new AnalyticsStore();
+        IAnalytics analytics = new Analytics(analyticsStore, K);
+
+        for(int queryNumber = 1; queryNumber <= totalNumberOfRequests; queryNumber++) {
+            inp = br.readLine().split(" "); 
+            switch(inp[0]) {
+                case "registerAction":
+                    ActionEnum actionEnum = ActionEnum.valueOf(inp[1]);
+                    analytics.registerAction(actionEnum);
+                    break;
+                case "getTotalNumberOfLoggedActions":
+                    int totalNumberOfLoggedEvents = analytics.getTotalNumberOfLoggedActions();
+                    out.println(totalNumberOfLoggedEvents);
+                    break;
+                case "getNumberOfActionRegisteredButNotSentToAnalyticsStore":
+                    int x = analytics.getNumberOfActionRegisteredButNotSentToAnalyticsStore();
+                    out.println(x);
+                    break;
+                case "getMostFrequentlyUsedActions":
+                    List<ActionEnum> li = analytics.getMostFrequentlyUsedActions();
+                    for(ActionEnum a : li) {
+                        out.print(a + " ");
+                    }
+                    out.print("\n");
+                    break;
+            }
+        }
+        
+        Queue<ActionEnum> q = analyticsStore.getAllStoredActions();
+        for(ActionEnum a : q) {
+            out.print(a.toString() + " ");
+        }
+        out.print("\n");
+
+        out.flush();
+        out.close();
+    }
+}
+
+class AnalyticsStore implements IAnalyticsStore {
+    private Queue<ActionEnum> storedEventEnums = new LinkedList<>();
+
+    @Override
+    public void storeActions(Queue<ActionEnum> q) {
+        while(!q.isEmpty()) {
+            storedEventEnums.add(q.poll());
+        }
+    }
+
+    @Override
+    public Queue<ActionEnum> getAllStoredActions() {
+        Queue<ActionEnum> clonedActionEnums = new LinkedList<>(storedEventEnums);
+        return clonedActionEnums;
+    }
+}
+
+
+
+====== test - 2 =============
+
+		List<List<String>> list = Arrays.asList(
+						Arrays.asList("1", "01-01-2023","01:30", "ERROR", "failed"),
+						Arrays.asList("2", "01-01-2023","14:00", "ERROR", "failed"),
+						Arrays.asList("3", "01-01-2023","15:00", "INFO", "established"),
+						Arrays.asList("4", "01-01-2022","18:00", "CRITICAL", "failed")
+				);
+
+
+--- apply filter
+--- sort based on date + time
+
+LocalDateTime
