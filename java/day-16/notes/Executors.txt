@@ -1,0 +1,187 @@
+Executors
+---------
+The Concurrency API introduces the concept of an ExecutorService as a higher level replacement for working with threads directly. 
+Executors are capable of running asynchronous tasks and typically manage a pool of threads, so we don't have to create new threads manually. 
+
+All threads of the internal pool will be reused under the hood for revenant tasks, so we can run as many concurrent tasks as we want throughout the life-cycle of our application with a single executor service.
+
+- single thread pool 
+- fixed thread pool
+- cached thread pool
+- scheduled thread pool
+
+fixed thread pool ->  - Creates a thread pool that reuses a fixed number of threads operating off a shared unbounded queue. 
+
+single thread pool -> Creates an Executor that uses a single worker thread operating off an unbounded queue.
+
+cached thread pool -> Creates a thread pool that creates new threads as needed, but will reuse previously constructed threads when they are available.
+
+threadPool.awaitTermination(2, TimeUnit.SECONDS); -> Blocks until all tasks have completed execution after a shutdown request, or the timeout occurs, or the current thread isinterrupted, whichever happens first.
+
+ An Executor is an object that is responsible for threads management and execution of Runnable tasks submitted from the client code. It decouples the details of thread creation, scheduling, etc from the task submission so you can focus on developing the task’s business logic without caring about the thread management details.
+
+That means, in the simplest case, rather than creating a thread to execute a task like this:
+
+Thread t = new Thread(new RunnableTask());
+t.start();
+
+You submit tasks to an executor like this:
+
+Executor executor = anExecutorImplementation;
+executor.execute(new RunnableTask1());
+executor.execute(new RunnableTask2());
+
+
+ExecutorService executor = Executors.newSingleThreadExecutor();
+		executor.submit(() -> {
+		    String threadName = Thread.currentThread().getName();
+		    System.out.println("Hello " + threadName);
+		});
+
+package co.sit.module1;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+class MyTask implements Runnable{
+ public void run() {
+	 System.out.println("Inside run method");
+	 System.out.println(Thread.currentThread().getName());
+	 try {
+		 TimeUnit.SECONDS.sleep(5);
+	 }catch(Exception ex) {}
+ }
+}
+
+public class Test {
+
+	public static void main(String[] args) {
+		MyTask task = new MyTask();
+		Thread ct1 = new Thread(task);
+		ct1.start();
+		
+		//Executor executor = Executors.newSingleThreadExecutor();
+		Executor executor = Executors.newFixedThreadPool(10); //10 thread count
+	
+		executor.execute(task);
+		executor.execute(task);		
+		executor.execute(task);		
+		System.out.println(Thread.activeCount());
+
+		ExecutorService executor = Executors.newFixedThreadPool(10); //10 thread count
+		executor.submit(task);
+	}
+}
+
+class Employee{
+  private int empId;
+  private String empName;
+  private double salary;
+  private double basicSalaryPerDay;
+  private int noOfWorkingDays;
+  //constructor
+  //setters & getters
+}
+
+class Main{
+  public static void main(String[] args){
+    Employee emp1 = new Employee(101,"Sanjay",2500, 22);
+    Employee emp2 = new Employee(102,"Praveen",2750, 20);
+    8 more employees
+    List<Employee> empList = new ArrayList<>();
+    empList.add(emp1); .....
+
+    ExecutorService service = Executors.newFixedThreadPool(3);
+    for(int i=0; i<empList.size();i++){
+      Employee e = empList.get(i);
+      SalaryCalculation salCalc = new SalaryCalculation(e);
+      service.submit(salCalc);
+    }
+  }
+}
+
+class SalaryCalculation extends Thread{
+  private Employee emp = null;
+  public SalaryCalculation(Employee emp){
+    this.emp = emp;
+  }
+
+  public void run(){
+    
+  }
+  public void salaryCalculation(){
+	double sal = emp.getBasicSalaryPerDay() * emp.getNoOfWorkingDays();
+	emp.setSalary(sal);
+  }
+}
+debug the program
+--------------------
+
+Difference between the submit() and execute() method in Java Concurrency
+
+1) The submit() can accept both Runnable and Callable tasks but 
+   execute() can only accept the Runnable task.
+
+2) The submit() method is declared in the java.util.concurrent.ExecutorService interface while 
+   the execute() method is declared in the java.util.concurrent.Executor interface.
+
+3) The return type of submit() method is a java.util.concurrent.Future object but 
+  the return type of execute() method is void.
+
+
+
+
+import java.util.concurrent.*;
+ 
+/**
+ * SimpleExecutorExample.java
+ * This program demonstrates how to create a single-threaded executor
+ * to execute a Runnable task.
+ * @author Sunil
+ */
+public class SimpleExecutorExample {
+ 
+    public static void main(String[] args) {
+        ExecutorService pool = Executors.newSingleThreadExecutor();
+ 
+        Runnable task = new Runnable() {
+            public void run() {
+                System.out.println(Thread.currentThread().getName());
+            }
+        };
+ 
+        pool.execute(task);
+ 
+        pool.shutdown(); //to destroy the executor after the thread completes execution. Otherwise, the program is still running afterward.
+    }
+}
+
+-------------------------
+program shows you how to submit a Callable task to an executor.  A Callable task returns a value upon completion and we use the java.util.concurrent.Future object to obtain the value
+
+ExecutorService pool = Executors.newSingleThreadExecutor(); 
+        Callable<Integer> task = new Callable<Integer>() {
+            public Integer call() {
+                try {
+                    // fake computation time
+                    Thread.sleep(5000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+ 
+                return 1000;
+            }
+        };
+ 
+        Future<Integer> result = pool.submit(task);
+ 
+        try { 
+            Integer returnValue = result.get(); 
+            System.out.println("Return value = " + returnValue); 
+        } catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
+        }
+ 
+        pool.shutdown();
+---------------------------------------------------------------------------------------------------------
