@@ -199,4 +199,39 @@ class PalindromeCheckTest {
 }
 
 
+================ *************** ================
+Parameterized Test
 
+Dependencies:  junit-jupiter-engine, junit-jupiter-params
+
+class PalindromeCheckTest {
+	static PalindromeCheck palObj;
+	
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+		palObj = new PalindromeCheck();
+	}
+
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+		palObj = null;
+	}
+
+
+	@ParameterizedTest
+	@ValueSource(strings = {"eye", "madam", "MaDam", "1221"})
+	void testIsPalindrome(String str) {
+		System.out.println(str);
+		boolean actual = palObj.isPalindrome(str);
+		assertTrue(actual);
+	}
+}
+
+
+==== Hands-on --- to check whether a number is even or not  -- EvenCheck
+
+apply parameterized test for {10, 24, 28, 66, 12}
+
+
+---- Google "JUnit 5 Assertions"  --- implement all assertions
+ 
