@@ -1,0 +1,202 @@
+assertEquals(expected, actual);
+assertEquals(expected, actual, message);
+
+	@Test
+	void testFindLargest3() {
+		int[] data = {};
+		/*
+		assertThrows(ArrayIndexOutOfBoundsException.class, new Executable() {
+			@Override
+			public void execute() throws Throwable {
+				larObj.findLargest(data);				
+			}			
+		});
+		*/
+		assertThrows(ArrayIndexOutOfBoundsException.class, () -> larObj.findLargest(data));				
+	}	
+
+---------------------------------- ***** --------------------
+
+@DisplayName("TEST CASES TO FIND LARGEST")		-- for methods and class
+@DisplayName(value = "FOR ALL +VE NUMBERS")
+
+-----------------* ----------------------
+@TestMethodOrder(Alphanumeric.class)  -- a class level annotation - Alphanumeric.class is deprecated
+
+@TestMethodOrder(value = org.junit.jupiter.api.MethodOrderer.OrderAnnotation.class) +  @Order(1) / @Order(value = 3)
+
+--------- ***** -------------
+@Disabled  -  a class level & method level annotation
+
+--------- ***** -------------
+
+@RepeatedTest(value = 2)
+
+@DisplayName(value = "Palindrome")
+@RepeatedTest(value = 2, name = "{displayName} --> {currentRepetition} of {totalRepetitions}")
+
+--------- ***** -------------
+=> to get the informations about Test Class and Test Method == org.junit.jupiter.api.TestInfo
+
+	@Test
+	@DisplayName("testMethod")
+	void testMethodInformation(TestInfo testInfo) {
+		System.out.println("test class name = " + testInfo.getTestClass().get().getName());
+		System.out.println("test method name = " + testInfo.getTestMethod().get().getName()+"()");
+		System.out.println("display name = " + testInfo.getDisplayName());
+		assertTrue(true);
+	}
+
+--------- ***** -------------
+ 
+work on @Tag (later) - used to filter test methods for different environments 
+
+--------- ***** -------------
+
+Practicals 
+
+
+LargestTest.java
+
+package com.capgemni.junit.services;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer.Alphanumeric;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.function.Executable;
+
+
+@DisplayName("TEST CASES TO FIND LARGEST")
+//@TestMethodOrder(Alphanumeric.class)
+@TestMethodOrder(value = org.junit.jupiter.api.MethodOrderer.OrderAnnotation.class)
+//@Disabled
+class LargestTest {
+	static Largest larObj = null;
+	
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+		larObj = new Largest();
+	}
+
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+		larObj = null;
+	}
+
+
+	@Test
+	@DisplayName(value = "FOR ALL +VE NUMBERS")
+	@Order(1)
+	void testFindLargest() {
+		int[] data = {58,46,92,71,68,10};
+		int expected = 92;
+		int actual = larObj.findLargest(data);
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	@Order(4)
+	void testFindLargest1() {
+		int[] data = {-58,46,-92,71,-68,10};
+		int expected = 71;
+		int actual = larObj.findLargest(data);
+		assertEquals(expected, actual);
+	}	
+	
+	@Test
+	@Order(value = 3)
+	@DisplayName("FOR ALL -VE NUMBERS")
+	void testFindLargest2() {
+		int[] data = {-58,-46,-92,-71,-68,-10};
+		int expected = -10;
+		int actual = larObj.findLargest(data);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	@Order(value = 2)
+	//@Disabled
+	void testFindLargest3() {
+		int[] data = {};
+		/*
+		assertThrows(ArrayIndexOutOfBoundsException.class, new Executable() {
+			@Override
+			public void execute() throws Throwable {
+				larObj.findLargest(data);				
+			}			
+		});
+		*/
+		assertThrows(ArrayIndexOutOfBoundsException.class, () -> larObj.findLargest(data));				
+	}	
+}
+
+
+--- PalndromeCheckTest.java ----
+package com.capgemni.junit.services;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.InputMismatchException;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
+
+class PalindromeCheckTest {
+
+	@Test
+	//@RepeatedTest(value = 2)
+	@DisplayName(value = "Palindrome")
+	@RepeatedTest(value = 2, name = "{displayName} --> {currentRepetition} of {totalRepetitions}")
+	@Tag(value = "prod")
+	void testIsPalindrome() {
+		String str = "eye";
+		PalindromeCheck palObj = new PalindromeCheck();
+		assertTrue(palObj.isPalindrome(str));
+	}
+
+	@Test
+	void testIsPalindrome_01() {
+		String str = "java";
+		PalindromeCheck palObj = new PalindromeCheck();
+		assertFalse(palObj.isPalindrome(str));
+	}	
+	
+	@Test
+	void testIsPalindrome_02() {
+		String str = null;
+		PalindromeCheck palObj = new PalindromeCheck();
+		assertThrows(NullPointerException.class, () -> palObj.isPalindrome(str));
+	}	
+	
+	@Test
+	void testIsPalindrome_03() {
+		String str = "";
+		PalindromeCheck palObj = new PalindromeCheck();
+		assertThrows(InputMismatchException.class, () -> palObj.isPalindrome(str));
+	}	
+	
+	@Test
+	@DisplayName("testMethod")
+	void testMethodInformation(TestInfo testInfo) {
+		System.out.println("test class name = " + testInfo.getTestClass().get().getName());
+		System.out.println("test method name = " + testInfo.getTestMethod().get().getName()+"()");
+		System.out.println("display name = " + testInfo.getDisplayName());
+		assertTrue(true);
+	}
+}
+
+
+
