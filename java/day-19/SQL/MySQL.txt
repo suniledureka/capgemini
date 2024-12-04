@@ -1,0 +1,1405 @@
+Databases
+=========
+-> A Database is something to store data on a computer
+-> A Database is a collection of logically related data.
+-> It is used to search and retrieve data to answer queries
+
+-> Database is the place where data is stored.
+-> Databases are used for Websites, Desktop Applications, Mobile Applications, every where
+
+-> Database contain Tables
+-> Table is an object used to store data
+-> Table is like a Spread Sheet
+-> Tables have Rows, Columns and a Name
+
+-> Database often have multiple Tables
+-> An alternative to a Database is a "flat file", a text file for storing data
+
+Different Types of Databases
+-> Two main types of Databases
+-> Each have their pros and cons
+
+1) Relational Database
+-> represents related sets of data
+-> linked using relationships
+-> designed for easy updation, addition and removal of data
+-> main database used in websites and applications
+
+2) Data Warehouse
+-> Based on a large central table with other linked tables
+-> Fewer tables but they have more records
+-> Used for reporting
+
+
+A database may be designed for batch processing, real-time processing, or online processing.
+
+A Database Management System (DBMS) is a set of software or programs that enables storing, modifying and extracting information from a database
+
+It also provides users with tools to add, delete, access, modify, and analyze data stored in one location.
+
+A Database Management System (DBMS) is used to manage any collection of compatible, and ideally normalized data.
+
+The DBMS manages storage and access to the data, and provides a query language to specify actions associated with the data. 
+
+The standard query language is SQL (Structured Query Language). 
+
+A group can access the data by using query and reporting tools that are part of the DBMS, or by using application programs specifically written to access the data.
+
+A Data Model is a representation of a real world situation about which data is to be collected and stored in a database. 
+
+A Data Model depicts the dataflow and logical interrelationship among different data elements.
+
+There are 2 types of data models --> 
+(1) Object based Logical Models (E-R Model)
+(2) Record based Logical Models (The Relational Model, The Network Model, The Hierarchical Model)
+
+
+
+Relational Database Management System
+------------------------------------
+1) RDBMS is a Database Management System (DBMS) that is based on the Relational Model
+
+2) In Relational Model - data and relationships are represented by a collection of tables. Each table has a number of columns with unique names
+
+3) RDBMS splits the data into a series of tables, linked by key elements that are common between tables. 
+
+4) It provides storage efficiency because data do not need to be duplicated between records.
+
+--> Information is stored in tables
+--> Tables store information about records
+--> Records have characteristics called attributes (fields/columns)
+================================================================
+
+Database Normalization
+----------------------
+-> How to reduce data redundancy and inconsistency in database tables
+  Data redundancy and inconsistency in database tables can be reduced by following a process called Normalization.
+
+-> Data Normalization is the process of organizing the fields and tables of a relational database to minimize redundancy and dependency
+
+-> Normalization usually involves dividing large tables into smaller (and less redundant) tables and defining relationships between them
+
+-> The objective is to isolate data so that additions, deletions, and modifications of a field can be made in just one table and propagated through the rest of the database via defined relationships.
+
+Normal Forms
+ -> Edgar F. Codd - the inventor of the Relational Model, introduced the concept of Normalization in 1970 - this concept is known as the First Normal Form (1NF)
+
+ -> Codd went on to define the Second Normal Form (2NF) and Third Normal Form (3NF) in 1971 and Codd and Raymond F Byce defined the Boyce-Codd Normal Form (BCNF) in 1974
+
+ -> Informally, a relational database table is often described as "normalized" if it is in the 3NF. Most 3NF tables are free of insertion, update and deletion animalities'.
+================================================================
+
+SQL (Structured Query Language)
+-------------------------------
+
+-> It is a special purpose programming language designed for managing data in RDBMS
+
+-> SQL queries are classified into 05 categories:-
+
+1) DDL - Data Definition Language
+      CREATE, ALTER, DROP, TRUNCATE
+
+2) DML - Data Manipulation Language
+      INSERT, UPDATE, DELETE, MERGE, ....
+
+3) DRL - Data Retrieval (Query) Language
+     SELECT
+
+4) TCL - Transaction Control Language
+     COMMIT, ROLL BACK, SAVEPOINT
+
+5) DCL - Data Control Language
+     GRANT, REVOKE
+
+================================================================
+MySQL Introduction
+------------------
+
+MySQL is an open-source relational database management system. 
+
+MySQL Database Service is a fully managed database service to deploy cloud-native applications
+
+A relational database organizes data into one or more data tables in which data types may be related to each other; these relations help structure the data. SQL is a language programmers use to create, modify and extract data from the relational database, as well as control user access to the database. In addition to relational databases and SQL, an RDBMS like MySQL works with an operating system to implement a relational database in a computer's storage system, manages users, allows for network access and facilitates testing database integrity and creation of backups. 
+
+MySQL has stand-alone clients that allow users to interact directly with a MySQL database using SQL, but more often, MySQL is used with other programs to implement applications that need relational database capability
+
+============================================================
+Install MySQL & MYSQL Workbench
+-------------------------------
+====================================================
+Create Database in MySQL
+------------------------
+> create database db_capgemini;
+
+> use db_capgemini;
+
+> show tables;
+
+> drop table emp;
+
+> drop database cognizant;
+
+> create user 'sunil'@'localhost' identified by '1234';
+
+> grant all on *.* to 'sunil'@'localhost'; 
+
+====================================================
+
+Database Storage Engines in MySQL
+---------------------------------
+Storage Engines are MySQL Database components that can handle the SQL operations for different database table types to store and manage information in a database.
+
+MySQL supports several storage engines that act as handlers for different table types. 
+
+To know which storage engines are supported by MySQL Database Server :
+ 
+mysql> show engines;
+
+
+MySQL 5.x supported storage engines
+-----------------------------------
+
+1) MyISAM: 
+
+2) InnoDB: 
+
+3) Memory: 
+
+4) CSV: 
+
+5) FEDERATED
+6) BLACKHOLE
+7) ARCHIVE
+8) MRG_MYISAM
+etc
+====================================================
+
+MySQL Data Types
+----------------
+MySQL uses mainly three categories of data types
+1) Numeric
+2) Date and Time
+3) String Types
+
+1) Numeric Data Types
+---------------------
+Type 	    Length-in Bytes 	
+----	    ---------------		
+TINYINT 	1 	
+SMALLINT 	2 	
+MEDIUMINT 	3 	
+INT 		4 	
+BIGINT 		8 
+
+FLOAT(Length, Decimals)  4 bytes
+	
+DOUBLE(Length, Decimals) 8 bytes
+
+DECIMAL(Length, Decimals) Length + 1 or 2 bytes	A DOUBLE stored as a string, allowing for a fixed decimal point
+
+Example:
+id INT(5) UNSIGNED NOT NULL AUTO_INCREMENT
+
+MariaDB>create table test(field1 tinyint NOT NULL, field2 tinyint UNSIGNED);
+
+
+2) Date and Time Types
+----------------------	
+DATE		YYYY-MM-DD
+
+TIME 		HH:MM:SS
+
+DATETIME	YYYY-MM-DD HH:MM:SS
+
+TIMESTAMP	YYYY-MM-DD HH:MM:SS
+(Values are converted from the current time zone to UTC while storing and 
+converted back from UTC to the current time zone when retrieved)
+
+mysql>create table test(field1 date, field2 time, field3 datetime, field4 timestamp);
+
+mysql> insert into test values(now(), now(), now(), now());
+
+mysql>select * from test;
+
+mysql> SET time_zone='+0:00';
+
+mysQL> select * from test;
+
+mysql> SELECT @@global.time_zone, @@session.time_zone;
+
+'2024-12-04', '11:28:37', '2024-12-04 11:28:37', '2024-12-04 05:58:37'
+
+
+3) String Types
+---------------
+CHAR(Length) 	A fixed-length field from 0 to 255 characters long
+
+VARCHAR(Length) A variable-length field from 0 to 65,535 characters long
+
+TINYTEXT 	A string with a maximum length of 255 characters
+
+TEXT 		A string with a maximum length of 65,535 characters
+
+MEDIUMTEXT 	A string with a maximum length of 16,777,215 characters
+
+LONGTEXT 	A string with a maximum length of 4,294,967,295 characters
+
+
+
+ENUM 	1 or 2 bytes	Short for enumeration, which means that each column can have one of several possible values
+
+SET 	1, 2, 3, 4, or 8 bytes	Like ENUM except that each column can have more than one of several possible values
+====================================================
+Create Databases in MySQL
+-----------------------
+
+> CREATE DATABASE [IF NOT EXISTS] db_name;
+
+
+Create Table in MySQL
+---------------------
+> CREATE TABLE table_name (column1 datatype, column2 datatype, column3 datatype,  ....); 
+
+Example:
+> CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255),  Address varchar(255),  City varchar(255));
+
+Create Table Using Another Table
+
+> CREATE TABLE TestTable AS SELECT customername, contactname FROM customers; 
+
+
+
+> DROP TABLE table_name; 
+
+The TRUNCATE TABLE statement is used to delete the data inside a table, but not the table itself.
+
+> TRUNCATE TABLE table_name; 
+
+-----------------------------------------------------------------------------
+==== SQL ALTER TABLE Statement ===
+
+- The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+
+- The ALTER TABLE statement is also used to add and drop various constraints on an existing table.
+
+> ALTER TABLE Customers ADD Email varchar(255);
+
+> ALTER TABLE Customers DROP COLUMN Email;
+> ALTER TABLE Customers DROP Email;
+
+> ALTER TABLE table_name MODIFY COLUMN column_name datatype; 
+> ALTER TABLE table_name MODIFY column_name datatype;
+
+Example:
+> ALTER TABLE Persons ADD DateOfBirth date; 
+> ALTER TABLE Persons MODIFY DateOfBirth year; 
+> ALTER TABLE Persons DROP DateOfBirth; 
+
+
+
+With Constraints
+===============
+-> SQL constraints are used to specify rules for data in a table.
+
+-> Constraints can be specified when the table is created with the CREATE TABLE statement, or after the table is created with the ALTER TABLE statement.
+
+-> Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and reliability of the data in the table. If there is any violation between the constraint and the data action, the action is aborted.
+
+
+SQL> CREATE TABLE table_name (column1 datatype constraint,
+    column2 datatype constraint, column3 datatype constraint, ....);
+
+The following constraints are commonly used in SQL:
+
+-> NOT NULL - ensures that a column cannot have a NULL value
+
+-> UNIQUE - ensures that all values in a column are different
+
+-> PRIMARY KEY - combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+
+-> FOREIGN KEY - prevents actions that would destroy links between tables
+
+-> CHECK - ensures that the values in a column satisfies a specific condition. The CHECK constraint is used to limit the value range that can be placed in a column. If you define a CHECK constraint on a column it will allow only certain values for this column.
+
+-> DEFAULT - sets a default value for a column if no value is specified
+
+-> CREATE INDEX - Used to create and retrieve data from the database very quickly
+
+> CREATE TABLE Persons (ID int NOT NULL, LastName varchar(255) NOT NULL, FirstName varchar(255) NOT NULL, Age int); 
+
+> ALTER TABLE Persons MODIFY Age int NOT NULL; 
+
+> CREATE TABLE Persons (ID int NOT NULL, LastName varchar(255) NOT NULL,
+    FirstName varchar(255),Age int, UNIQUE (ID)); 
+
+To name a UNIQUE constraint, and to define a UNIQUE constraint on multiple columns, use the following SQL syntax:
+
+> CREATE TABLE Persons (ID int NOT NULL, LastName varchar(255) NOT NULL,
+    FirstName varchar(255), Age int,
+    CONSTRAINT UC_Person UNIQUE (ID,LastName)); 
+
+
+> ALTER TABLE Persons ADD UNIQUE (ID); 
+
+> ALTER TABLE Persons ADD CONSTRAINT UC_Person UNIQUE (ID,LastName); 
+
+> ALTER TABLE Persons DROP INDEX UC_Person;  // ALTER TABLE Persons
+DROP CONSTRAINT UC_Person; 
+
+> CREATE TABLE Persons (ID int NOT NULL, LastName varchar(255) NOT NULL,
+    FirstName varchar(255), Age int, PRIMARY KEY (ID)); 
+
+> CREATE TABLE Persons (ID int NOT NULL, LastName varchar(255) NOT NULL,
+    FirstName varchar(255), Age int,
+    CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)); 
+
+> ALTER TABLE Persons ADD PRIMARY KEY (ID); 
+
+> ALTER TABLE Persons ADD CONSTRAINT PK_Person PRIMARY KEY (ID,LastName); 
+
+
+> ALTER TABLE Persons DROP PRIMARY KEY; 
+> ALTER TABLE Persons DROP CONSTRAINT PK_Person; 
+
+
+> CREATE TABLE Orders (OrderID int NOT NULL,
+    OrderNumber int NOT NULL, PersonID int,
+    PRIMARY KEY (OrderID),
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)); 
+
+To allow naming of a FOREIGN KEY constraint, and for defining a FOREIGN KEY constraint on multiple columns, use the following SQL syntax:
+
+> CREATE TABLE Orders (OrderID int NOT NULL, OrderNumber int NOT NULL,
+    PersonID int, PRIMARY KEY (OrderID),
+    CONSTRAINT FK_PersonOrder FOREIGN KEY (PersonID)
+    REFERENCES Persons(PersonID)); 
+
+> ALTER TABLE Orders ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID); 
+
+> ALTER TABLE Orders ADD CONSTRAINT FK_PersonOrder
+FOREIGN KEY (PersonID) REFERENCES Persons(PersonID); 
+
+> ALTER TABLE Orders DROP FOREIGN KEY FK_PersonOrder; // AALTER TABLE Orders DROP CONSTRAINT FK_PersonOrder; 
+
+
+> CREATE TABLE Persons (ID int NOT NULL, LastName varchar(255) NOT NULL,
+    FirstName varchar(255), Age int, CHECK (Age >= 18)); 
+
+To allow naming of a CHECK constraint, and for defining a CHECK constraint on multiple columns, use the following SQL syntax:
+
+> CREATE TABLE Persons (ID int NOT NULL, LastName varchar(255) NOT NULL,
+    FirstName varchar(255), Age int, City varchar(255),
+    CONSTRAINT CHK_Person CHECK (Age >= 18 AND City='Hyderabad')); 
+
+> ALTER TABLE Persons ADD CHECK (Age>=18); 
+> ALTER TABLE Persons ADD CONSTRAINT CHK_PersonAge CHECK (Age>=18 AND City='Sandnes'); 
+
+
+> ALTER TABLE Persons DROP CHECK CHK_PersonAge; 
+
+> CREATE TABLE Persons (ID int NOT NULL,LastName varchar(255) NOT NULL,
+    FirstName varchar(255), Age int,
+    City varchar(255) DEFAULT 'Sandnes'); 
+
+- The DEFAULT constraint can also be used to insert system values, by using functions like GETDATE()
+
+
+> CREATE TABLE Orders (ID int NOT NULL, OrderNumber int NOT NULL,
+    OrderDate date DEFAULT GETDATE()); 
+
+> CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    OrderDate datetime DEFAULT current_timestamp, 
+    FOREIGN KEY (PersonID) REFERENCES Persons(ID)
+); 
+
+---- OrderDate date DEFAULT (current_date), 
+
+
+> ALTER TABLE Persons ALTER City SET DEFAULT 'Sandnes'; 
+
+> ALTER TABLE Persons MODIFY City DEFAULT 'Sandnes'; (Oracle)
+
+> ALTER TABLE Persons ALTER City DROP DEFAULT; 
+> ALTER TABLE Persons ALTER COLUMN City DROP DEFAULT; (Oracle)
+
+
+The CREATE INDEX statement is used to create indexes in tables.
+
+Indexes are used to retrieve data from the database more quickly than otherwise. The users cannot see the indexes, they are just used to speed up searches/queries.
+
+Creates an index on a table. Duplicate values are allowed:
+CREATE INDEX index_name ON table_name (column1, column2, ...); 
+
+CREATE UNIQUE INDEX index_name ON table_name (column1, column2, ...); 
+
+
+> CREATE INDEX idx_lastname ON Persons (LastName); 
+> CREATE INDEX idx_pname ON Persons (LastName, FirstName); 
+
+> ALTER TABLE table_name DROP INDEX index_name; 
+> DROP INDEX index_name;  // DROP INDEX table_name.index_name;  // DROP INDEX index_name ON table_name; 
+
+
+
+
+Auto-increment allows a unique number to be generated automatically when a new record is inserted into a table.
+
+Often this is the primary key field that we would like to be created automatically every time a new record is inserted.
+
+> CREATE TABLE Persons (Personid int NOT NULL AUTO_INCREMENT,
+    LastName varchar(255) NOT NULL, FirstName varchar(255),
+    Age int, PRIMARY KEY (Personid)); 
+
+
+By default, the starting value for AUTO_INCREMENT is 1, and it will increment by 1 for each new record.
+
+To let the AUTO_INCREMENT sequence start with another value, use the following SQL statement:
+
+> ALTER TABLE Persons AUTO_INCREMENT=100; 
+
+
+> RENAME TABLE Orders TO PERSON_ORDERS;
+
+====================================================
+Insert Records
+--------------
+
+It is possible to write the INSERT INTO statement in two ways:
+
+1. Specify both the column names and the values to be inserted:
+
+> INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...); 
+
+2. If you are adding values for all the columns of the table, you do not need to specify the column names in the SQL query. However, make sure the order of the values is in the same order as the columns in the table. 
+
+> INSERT INTO table_name VALUES (value1, value2, value3, ...); 
+
+
+Table : Customers : CustomerID 	CustomerName 	ContactName 	Address 	City 	PostalCode 	Country
+
+INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');
+
+
+> INSERT INTO Customers (CustomerName, City, Country)
+VALUES ('Cardinal', 'Stavanger', 'Norway');
+
+====================================================
+Select Statement
+----------------
+-> The SELECT statement is used to select data from a database.
+
+-> The data returned is stored in a result table, called the result-set.
+
+> SELECT * FROM table_name; 
+> SELECT CustomerName, City FROM Customers;
+
+> SELECT Country FROM Customers;
+> SELECT DISTINCT Country FROM Customers;
+
+> SELECT * FROM Customers WHERE Country='Mexico';
+
+> SELECT * FROM Customers WHERE CustomerID=1; 
+
+Operators in The WHERE Clause
+
+= 	Equal 	
+> 	Greater than 	
+< 	Less than 	
+>= 	Greater than or equal 	
+<= 	Less than or equal 	
+<> 	Not equal. Note: In some versions of SQL this operator may be written as != 	
+BETWEEN 	Between a certain range 	
+LIKE 	Search for a pattern 	
+IN 	To specify multiple possible values for a column
+
+SELECT * FROM Products WHERE Price <> 18;
+SELECT * FROM Products WHERE Price BETWEEN 50 AND 60;
+SELECT * FROM Customers WHERE City LIKE 's%';
+SELECT * FROM Customers WHERE City IN ('Paris','London');
+
+SELECT * FROM Customers WHERE Country='Germany' AND City='Berlin';
+SELECT * FROM Customers WHERE City='Berlin' OR City='München';
+SELECT * FROM Customers WHERE Country='Germany' OR Country='Spain';
+SELECT * FROM Customers WHERE NOT Country='Germany';
+
+SELECT * FROM Customers WHERE Country='Germany' AND (City='Berlin' OR City='München'); 
+SELECT * FROM Customers WHERE NOT Country='Germany' AND NOT Country='USA'; 
+
+The ORDER BY keyword is used to sort the result-set in ascending or descending order.
+
+SELECT * FROM Customers ORDER BY Country;
+SELECT * FROM Customers ORDER BY Country DESC; 
+SELECT * FROM Customers ORDER BY Country, CustomerName; 
+SELECT * FROM Customers ORDER BY Country ASC, CustomerName DESC; 
+
+
+How to Test for NULL Values?
+
+> SELECT column_names FROM table_name WHERE column_name IS NULL; 
+> SELECT column_names FROM table_name WHERE column_name IS NOT NULL; 
+
+> SELECT CustomerName, ContactName, Address FROM Customers WHERE Address IS NULL;
+
+> SELECT CustomerName, ContactName, Address FROM Customers WHERE Address IS NOT NULL;
+
+====================================================
+MySQL UPDATE
+
+UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition; 
+
+UPDATE Customers SET ContactName = 'Alfred Schmidt', City= 'Frankfurt' WHERE CustomerID = 1;
+
+UPDATE Customers SET ContactName='Juan' WHERE Country='Mexico';
+
+UPDATE Customers SET ContactName='Juan';
+
+
+MySQL DELETE
+
+DELETE FROM table_name WHERE condition;
+DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
+DELETE FROM Customers;
+
+
+====================================================
+
+MySQL Aggregate Functions
+=========================
+MySQL's aggregate function is used to perform calculations on multiple values and return the result in a single value like the average of all values, the sum of all values, and maximum & minimum value among certain groups of values. 
+
+We mostly use the aggregate functions with SELECT statements in the data query languages.
+
+-> Aggregate functions produce the summarised data from our database. 
+-> different organization levels need different information such as top levels managers interested in knowing whole figures and not the individual details. 
+
+Usecase:
+Let us take an example of Netflix (video streaming website which has huge collections of the movie) database, where management may require the following details:
+
+    -> Most rented movies.
+    -> Least rented movies.
+    -> Average number that each movie is rented out in a month.
+	-> We can easily produce these details with the help of aggregate functions.
+
+
+Syntax:
+     function_name (DISTINCT | ALL expression)  
+
+-> First, we need to specify the name of the aggregate function.
+-> Second, we use the DISTINCT modifier when we want to calculate the result based on distinct values or ALL modifiers when we calculate all values, including duplicates. The default is ALL.
+-> Third, we need to specify the expression that involves columns and arithmetic operators.
+
+Aggregate Function 	Descriptions
+------------------      ------------
+count() 		it returns the number of rows, including rows with NULL values in a group.
+
+sum() 			it returns the total summed values (Non-NULL) in a set.
+
+average() 		it returns the average value of an expression.
+
+min() 			it returns the minimum (lowest) value in a set.
+
+max() 			it returns the maximum (highest) value in a set.
+
+first() 		it returns the first value of an expression.
+
+last() 			it returns the last value of an expression.
+
+group_concat() 		it returns a concatenated string.
+
+
+mysql> CREATE TABLE employees(emp_id int auto_increment, emp_name varchar(45) NOT NULL,    
+        emp_age int NOT NULL,    
+        city varchar(50),
+        income int , primary key(emp_id));  
+
+mysql> insert into employees(emp_name, emp_age, city, income) values
+	('Peter', 32, 'New York',200000),
+	('Mark', 32, 'Califoria',100000),
+	('Donald', 40, 'California',300000),
+	('Obama', 35, 'Florida',250000),
+	('Linklon', 32, 'Florida',500000),
+	('Kane', 45, 'Alaska',450000),
+	('Adam', 35, 'California',550000),
+	('Maccullam', 40, 'Florida',350000),
+	('Brayan',32,'Alaska',400000),
+	('Stephen',40,'Arizona',600000),
+	('Alexander',45,'California',7000);
+
+
+1) count() Function
+
+=> MySQL count() function is used to return the count of an expression. 
+It allows us to count all rows or only some rows of the table that matches a specified condition. 
+It returns BIGINT. 
+It returns zero if it does not find any matching rows. 
+It can work with both numeric and non-numeric data type columns.
+
+We can use the count function in three forms, which are explained below:
+
+-> count (*)
+-> count (expression)
+-> count (distinct)
+
+=> Get the total number of employees
+ mysql> SELECT COUNT(emp_name) FROM employees; 
+
+=> Get the total number of employees whose age is >= 32
+
+ mysql> SELECT COUNT(*) FROM employees WHERE emp_age>32;    
+ mysql> SELECT COUNT(*) AS SENIORS FROM employees WHERE emp_age>32; 
+ mysql> SELECT COUNT(*) SENIORS FROM employees WHERE emp_age>32; 
+ mysql> SELECT COUNT(*) 'SENIORS' FROM employees WHERE emp_age>32; 
+
+=> to count the Non-Null and distinct rows in the column emp_age:
+ mysql> SELECT COUNT(DISTINCT emp_age) FROM employees;  
+
+
+MySQL count() Function with GROUP BY Clause
+
+=> Get the number of employee in each city
+ mysql> SELECT emp_name, city, COUNT(*) FROM employees GROUP BY city;  
+ mysql> SELECT group_concat(emp_name), city, COUNT(*) FROM employees GROUP BY city;  
+
+MySQL count() Function with HAVING and ORDER BY Clause
+
+=> Get the employee name who has at least two age same and sorts them based on the count result:
+ mysql> SELECT group_concat(emp_name), emp_age, COUNT(*) FROM employees GROUP BY emp_age   
+HAVING COUNT(*) >= 2 ORDER BY COUNT(*);  
+
+2) sum() Function
+
+=> sum() function returns the total summed (non-NULL) value of an expression. 
+It returns NULL if the result set does not have any rows. 
+It works with numeric data type only.
+
+
+mysql> CREATE TABLE employee(ID int primary key auto_increment, name varchar(45) NOT NULL,    
+        occupation varchar(35) NOT NULL,    
+        working_date date,  
+        working_hours varchar(10));  
+
+
+mysql> INSERT INTO employee(name, occupation, working_date, working_hours) VALUES    
+    ('Robin', 'Scientist', '2020-10-04', 12),  
+    ('Warner', 'Engineer', '2020-10-04', 10),  
+    ('Peter', 'Actor', '2020-10-04', 13),  
+    ('Marco', 'Doctor', '2020-10-04', 14),  
+    ('Brayden', 'Teacher', '2020-10-04', 12),  
+    ('Antonio', 'Business', '2020-10-04', 11);  
+
+
+=> calculate the total number of working hours of all employees in the table
+    mysql> SELECT SUM(working_hours) AS "Total Working Hours" FROM employee;    
+
+=> calculate the total working hours of employees whose working_hours >= 12
+    mysql> SELECT SUM(working_hours) AS "Total working hours" FROM employee WHERE working_hours>=12;  
+
+=> calculate the total working hours of each employee
+mysql> SELECT name, occupation, SUM(working_hours) AS "Total Working Hours" FROM employee GROUP BY name; 
+
+=> calculate the working hours of all employees, grouping them based on their occupation and returns the result whose Total_working_hours>24.
+
+  mysql> SELECT name, occupation, SUM(working_hours) Total_working_hours   
+    FROM employee GROUP BY occupation   
+    HAVING SUM(working_hours)>24;  
+
+=> total summed value of a Unique number of records present in the table.
+    mysql> SELECT name, occupation,   
+    SUM(DISTINCT working_hours) Total_working_hours  
+    FROM employee   
+    GROUP BY occupation;  
+
+
+3) avg() Function
+
+=> avg() function calculates the average of the values specified in the column. Similar to the SUM() function, it also works with numeric data type only.
+
+=> get the average working hours of all employees in the table
+    mysql> SELECT AVG(working_hours) AS "Average working hours" FROM employee;    
+
+    mysql> SELECT AVG(working_hours) Avg_working_hours FROM employee WHERE working_hours>=12;  
+
+    mysql> SELECT name, occupation, AVG(working_hours) Avg_working_hours FROM employee GROUP BY occupation;  
+
+    mysql> SELECT name, occupation,   
+    AVG(working_hours) Avg_working_hours   
+    FROM employee   
+    GROUP BY occupation   
+    HAVING AVG(working_hours)>9;  
+
+    mysql> SELECT name, occupation,   
+    AVG(DISTINCT working_hours) Avg_working_hours  
+    FROM employee  
+    GROUP BY occupation;  
+
+
+4) min() Function
+
+=> min() function returns the minimum (lowest) value of the specified column. It also works with numeric data type only.
+
+=> get minimum working hours of an employee available in the table
+    mysql> SELECT MIN(working_hours) AS Minimum_working_hours FROM employee;    
+
+    mysql> SELECT MIN(income) AS Minimum_Income FROM employees;    
+
+    mysql> SELECT MIN(income) AS Minimum_Income   
+    FROM employees WHERE emp_age >= 32 AND emp_age <= 40;  
+
+    mysql> SELECT emp_age, MIN(income) AS Minimum_Income   
+    FROM employees GROUP BY emp_age;  
+
+    mysql> SELECT city, MIN(income) AS Minimum_Income   
+    FROM employees GROUP BY city  
+    HAVING MIN(income) > 150000;  
+
+    mysql> SELECT emp_name, city, MIN(DISTINCT income) AS Minimum_Income   
+    FROM employees GROUP BY city;  
+
+5) max() Function
+
+=> max() function returns the maximum (highest) value of the specified column. It also works with numeric data type only.
+
+=> get maximum working hours of an employee available in the table
+   mysql> SELECT MAX(working_hours) AS Maximum_working_hours FROM employee; 
+
+    mysql> SELECT MAX(income) AS "Maximum Income" FROM employees;  
+
+    mysql> SELECT MAX(income) AS "Maximum_Income"   
+    FROM employees WHERE emp_age > 35;  
+
+    mysql> SELECT emp_age, MAX(income) AS "Maximum Income"   
+		FROM employees  GROUP BY emp_age; 
+
+    mysql> SELECT city, MAX(income) AS "Maximum Income"   
+    FROM employees GROUP BY city  HAVING MAX(income) >= 200000;  
+
+    mysql> SELECT city, MAX(DISTINCT income) AS "Maximum Income"   
+    FROM employees GROUP BY city;  
+
+MySQL MAX() Function in Subquery Example
+
+    mysql> SELECT * FROM employees WHERE   
+    emp_age = (SELECT MAX(emp_age) FROM employees);  
+
+
+
+6) first() Function
+
+=> This function returns the first value of the specified column. To get the first value of the column, we must have to use the LIMIT clause. It is because FIRST() function only supports in MS Access.
+
+=> get the first working date of an employee
+    mysql> SELECT working_date FROM employee LIMIT 1;    
+
+To SELECT FIRST two records
+    mysql> SELECT working_date FROM employee LIMIT 2;    
+
+
+7) last() Function
+
+=> This function returns the last value of the specified column. To get the last value of the column, we must have to use the ORDER BY and LIMIT clause. It is because the LAST() function only supports in MS Access.
+
+=> get the last working hour of an employee available in the table
+    mysql> SELECT working_hours FROM employee ORDER BY name DESC LIMIT 1;    
+
+
+8) GROUP_CONCAT() Function
+
+=> The GROUP_CONCAT() function returns the concatenated string from multiple rows into a single string. If the group contains at least one non-null value, it always returns a string value. Otherwise, we will get a null value. 
+
+emp_id	emp_fname	emp_lname	dept_id		designation
+1	David		Miller		2		Engineer
+2	Peter		Watson		3		Manager
+3	Mark		Boucher		1		Scientist
+2	Peter		Watson		3		BDE
+1	David		Miller		2		Developer
+4	Adam		Warner		4		Receptionist
+3	Mark		Boucher		1		Engineer
+4	Adam		Warner		4		Clerk
+
+
+=> concatenate the designation of the same dept_id on the employee table,
+    mysql> SELECT emp_id, emp_fname, emp_lname, dept_id,     
+    GROUP_CONCAT(designation) as "designation" FROM employee group by emp_id;    
+	
+
+    mysql> SELECT emp_fname, dept_id,   
+    GROUP_CONCAT(DISTINCT designation) as "designation" FROM employee group by emp_id;  
+
+
+    mysql>SELECT emp_fname,   
+    GROUP_CONCAT(DISTINCT designation SEPARATOR '; ') as "designation" FROM employee group by emp_id;   
+
+--------------------------------------------------------
+MySQL Subquery
+==============
+
+-> Sub-Query is a query that has query inside the query.
+
+-> it is also known as inner query.
+
+-> the query that contains subquery is known as the outer query. 
+
+-> Subqueries can be used with SELECT, INSERT, UPDATE, or DELETE statements.
+
+-> the inner query executed first -> gives the result to the outer query, and then the main/outer query will be performed. 
+
+-> MySQL allows us to use subquery anywhere, but it must be closed within parenthesis.
+
+Rules to use subqueries:
+
+> Subqueries should always use in parentheses.
+
+> If the main query does not have multiple columns for subquery, then a subquery can have only one column in the SELECT command.
+
+> We can use various comparison operators with the subquery, such as >, <, =, IN, ANY, SOME, and ALL. A multiple-row operator is very useful when the subquery returns more than one row.
+
+> We cannot use the ORDER BY clause in a subquery, although it can be used inside the main query.
+
+Syntax:
+
+    SELECT column_list (s) FROM  table_name  WHERE  column_name OPERATOR  
+       (SELECT column_list (s)  FROM table_name [WHERE])  
+
+
+mysql> SELECT name FROM employee WHERE EXISTS (SELECT * FROM user WHERE employee.emp_id = user.user_id);
+
+mysql> select * from employees;
+
+=> to get employee detail whose id matches in a subquery:
+
+   mysql> SELECT emp_name, city, income FROM employees WHERE emp_id IN (SELECT emp_id FROM employees); 
+
+=> Get the employee detail whose income is more than 350000 with the help of subquery:
+
+    SELECT * FROM employees WHERE emp_id IN (SELECT emp_id FROM employees WHERE income > 350000);   
+    --> This query first executes the subquery that returns the employee id whose income > 350000. Second, the main query will return the employees all details whose employee id are in the result set returned by the subquery.
+
+=> to find employee details with maximum income using a subquery.
+
+   mysql>SELECT emp_name, city, income FROM employees WHERE income = (SELECT MAX(income) FROM employees);  
+
+=> A correlated subquery in MySQL is a subquery that depends on the outer query. It uses the data from the outer query or contains a reference to a parent query that also appears in the outer query. MySQL evaluates it once from each row in the outer query.
+
+select an employee name and city whose income is higher than the average income of all employees in each city.
+
+   mysql> SELECT emp_name, city, income  
+    FROM employees emp WHERE income > (   
+    SELECT AVG(income) FROM employees WHERE city = emp.city);  
+
+
+--------------------------------------------------------
+MySQL Limit
+===========
+MySQL Limit query is used to restrict the number of rows returns from the result set, rather than fetching the whole set in the MySQL database. 
+
+The Limit clause works with the SELECT statement for returning the specified number of rows only
+
+Syntax:
+    SELECT column_list FROM table_name LIMIT count;
+    SELECT column_list FROM table_name LIMIT offset, count;  
+
+=> to get the top five younger employees:
+
+    mysql> SELECT * FROM employees ORDER BY emp_age LIMIT 5;  
+
+    mysql> SELECT emp_id, emp_name, income FROM employees ORDER BY income DESC LIMIT 3,7;  
+
+    mysql>SELECT emp_name, emp_age, income FROM employees WHERE emp_age>30 ORDER BY income DESC LIMIT 5;  
+
+=> to get the employee information who has the second-highest income:
+
+    mysql> SELECT emp_name, city, income FROM employees ORDER BY income LIMIT 1, 1;   //Not Accurate
+
+    mysql> SELECT* FROM employees where income != (select max(income) from employees order by income) ORDER BY income DESC limit 1;
+
+    mysql> select * from employees where income = (select max(income) from employees where income != (select max(income) from employees));
+
+    mysql> select max(income) from employees where income != (select max(income) from employees);
+--------------------------------------------------------
+
+MySQL String Functions
+======================
+
+1) CONCAT(string1,string2, ... )
+
+mysql> SELECT CONCAT('Capgemini',' Technology', ' Solutions') AS 'COMPANY NAME';
+mysql> SELECT concat(contactFirstName,' ',contactLastName) 'Full Name' FROM customers;
+mysql> SELECT concat(contactFirstName,' ',contactLastName) AS 'Full Name' FROM customers;
+
+
+2) INSTR - return the position of the first occurrence of a substring in a string
+INSTR function is case-insensitive.
+
+INSTR(source str, substr);
+
+mysql> SELECT INSTR('MySQL INSTR', 'MySQL'); -- 1
+
+To force INSTR function to search based on case-sensitive fashion, you use the BINARY operator as follows:
+
+mysql> SELECT INSTR('MySQL INSTR', BINARY 'mysql');
+
+to find product whose name contains the "car" keyword, you can use the INSTR function as follows:
+
+
+mysql> SELECT productName FROM products WHERE INSTR(productname,'Car') > 0;
+mysql> SELECT productname FROM products WHERE productname LIKE '%Car%';
+
+3) LENGTH - get the length of a string in bytes and in characters
+mysql> select char_length('MySQL')
+mysql> select length('MySQL')
+
+4) LEFT	- get a specified number of leftmost characters from a string
+mysql>SELECT LEFT('MySQL LEFT', 5);
+
+5) LOWER /LCASE - convert a string to lowercase
+mysql> SELECT LOWER('MySQL')
+mysql> SELECT firstname, LOWER(firstname) lowercase FROM employees ORDER BY firstname LIMIT 10;
+
+6) LTRIM - remove all leading spaces from a string
+mysql> SELECT LTRIM('   MySQL Tutorial') result;
+mysql> UPDATE customers SET addressLine1 = LTRIM(addressLine1);
+
+7) REPLACE - search and replace a substring in a string
+REPLACE(str, old_string, new_string);
+
+mysql> UPDATE products SET productDescription = REPLACE(productDescription, 'abuot', 'about');
+
+8) RIGHT - get a specified number of rightmost characters from a string
+mysql> SELECT RIGHT('MySQL', 3);
+
+This example uses the RIGHT() function to extract the number part after the "_" character of the product code:
+
+Example of Product Code = PROD_1002
+mysql>SELECT productCode, RIGHT(productCode, LENGTH(productCode) - INSTR(productCode, '_')) 'PRODUCT NO'
+      FROM products;
+
+9) SUBSTRING - extract a substring starting from a position with a specific length.
+
+mysql>SELECT SUBSTRING('MYSQL SUBSTRING', 7); -- SUBSTRING
+mysql>SELECT SUBSTRING('MySQL SUBSTRING',1,5); -- MySQL //5-length
+
+10) TRIM - remove unwanted characters from a string.
+
+11) FIND_IN_SET	- find a string within a comma-separated list of strings
+mysql> SELECT FIND_IN_SET('y', 'x,y,z'); -- 2
+mysql>SELECT FIND_IN_SET('a', 'x,y,z'); --0
+mysql>SELECT FIND_IN_SET('a', ''); --0
+mysql> SELECT FIND_IN_SET(NULL, 'x,y,z'); -- NULL
+
+
+11) FORMAT - format a number with a specific locale, rounded to the number of decimals 
+mysql> SELECT FORMAT(12500.2015, 2); -- 12,500.20
+SELECT FORMAT(12500.2015, 0);
+SELECT FORMAT(12500.2015, 2,'de_DE');
+
+SELECT productname,CONCAT('$',FORMAT(quantityInStock * buyPrice, 2)) stock_value FROM products ORDER BY stock_value;;
+SELECT productname,CONCAT('$',FORMAT(quantityInStock * buyPrice, 2)) stock_value FROM products ORDER BY quantityInStock * buyPrice;
+
+12) UPPER - convert a string to uppercase
+
+--------------------------------------------------------
+MySQL Date/Time Functions
+=========================
+1) date() - used to get the date from given date/datetime.
+mysql> select date('2018-09-24');
+mysql> select date('abc');  -- NULL
+mysql> select date('2018-09-24 10:51'); -- 2018-09-24
+
+
+2) adddate() / date_add() - used to get the date in which some time/date intervals are added.
+select adddate(date, days);
+mysql>select adddate('2018-09-24 10:51',1);
+mysql> select date_add('2018-09-24 10:51',interval 1 day);
+mysql> select date_add('2018-09-24 10:51',interval -1 day);
+
+3) curdate() - used to get the current date.
+mysql>select curdate()
+
+4) current_date() - used to get the current date.
+mysql> select current_date()
+
+5) date_format() - used to get the date in specified format.
+mysql> select date_format('2018-09-25', '%Y');
+mysql> select date_format('2018-09-25', '%y');  -- 
+
+%a, %b, %c, %d, %D, %e, %f, %H, %h, %i (Minutes), %j, %M, %m, %p (AM/PM), %r, %S, %s, 
+
+mysql>select date_format('2018-09-25', '%e %c %Y');  
+
+6) datediff() - used to get the difference between the two specified date values.
+mysql>select datediff('2018-09-10','2018-09-10');  
+
+7) day()/dayofmonth() - used to get the day from the given date.
+mysql> select day('2018-09-25'); 
+mysql> select dayofmonth('2018-09-25'); 
+
+8) dayname() - used to get the name of the day from the given date.
+mysql> select dayname('2018-09-25'); 
+
+9) dayofweek() - used to get the day of the week in numeric.
+mysql> select dayofweek('2021-11-07');
+
+10) dayofyear() - used to get the number of day in the year.
+
+11) from_days() - used to get the date of the given number of days.
+mysql> select from_days(366); 
+
+12) hour() - used to get the hour from the given datetime.
+mysql> select hour('2018-09-26 11:19');  
+mysql> select hour(now());  
+
+13) current_time() /curtime() - used to get the current time.
+mysql> select current_time()
+
+
+14) current_timestamp() - used to get the current date and time.
+mysql> select current_timestamp()
+
+15) last_day() - used to get the last date of the given month on the date.
+mysql> select last_day('2019-10-05');  
+mysql> select last_day(curdate());  
+mysql> select last_day(now());  
+
+16) localtime() - used to get the current date and time.
+mysql> select localtime()
+
+17) localtimestamp() - used to get the current date and time.
+mysql>select localtimestamp();
+
+18) makedate() - used to make the date from the given year and number of days.
+    select makedate(year, number_of_days);  
+mysql> select makedate(2018, 45); 
+
+19) maketime() - used to make the time from given hour, minute and second.
+    select maketime(hour, minute, second);  
+mysql> select maketime(10,12,8);  
+
+20) minute() - used to get the value of minute from the given datetime or time.
+mysql> select minute('10:18:25.000002'); 
+mysql> select minute('2018-9-28 10:20:25.000002');  
+
+21) month() - used to get the value of month from given datetime or time.
+mysql>select month('2018-9-28 10:20:25.000002');  
+
+22) monthname() - used to get the full month name.
+mysql>select monthname('2018-9-28 10:20:25.000002');
+
+23) second() - used to get the second portion from the specified date/datetime.
+mysql> select second('2018-9-28 10:20:25.000002');
+
+24) now() - used to get the current date and time.
+mysql> select now()
+mysql> select now()+1;  
+
+25) period_add() - adds the given number of month in the given period in the format YYMM or YYYYMM.
+mysql> select period_add(201808,2);
+
+26) period_diff() - used to get the difference between the given two periods.
+mysql> select period_diff(201908,201808);  
+
+27) quater() - used to get the quarter portion of the specified date/datetime.
+mysql>select quarter('2021-01-01')
+
+28) sec_to_time() - used to convert the specified second into time.
+mysql> select sec_to_time(60); 
+
+29) str_to_date() - used to convert the string into the given format_mask.
+mysql> select str_to_date('February 11 1995', '%M %d %Y'); 
+mysql>     select str_to_date('01,50,25','%h,%i,%s');  
+
+30) subdate() - used to get the date which is subtracted by given intervals.
+
+31) sysdate() - used to get the system date.
+mysql> select sysdate(); 
+mysql> select sysdate()+2;
+
+32) time() - used to get the time for the given time/datetime.
+mysql> select time('2018-10-01 08:01:23.000005');  
+
+33) time_format() - used to format the time in specified format_mask.
+mysql> select time_format('12:56:12','%H %i %s');
+
+34) time_to_sec() - used to convert the time into seconds.
+mysql> select time_to_Sec('12:56:12');  
+
+35) timediff() - used to get the difference for the given two time/datetime.
+mysql> select timediff('01:25:23','12:56:12');
+
+36) timestamp() - used to convert the expression into datetime/time.
+mysql> select timestamp('2018-10-03'); 
+mysql> select timestamp('2018-10-03 01:13:42');
+
+37) to_days() - used to convert the date into numeric number of days.
+mysql> select to_days('2018-10-03');  
+
+38) week() - used to get the week portion for the specified date.
+mysql> select week('2018-10-03');  
+
+39) weekofyear() - used to get the week of the given date.
+mysql>select weekofyear('2018-10-03');  
+
+The WEEKOFYEAR function returns the week of the year (a number from 1 to 53) given a date value. The WEEKOFYEAR function assumes that the first day of the week is Monday and the first week has more than 3 days. The WEEKOFYEAR function returns the same as the WEEK function with the syntax of WEEK(date_value,3)
+
+--------------------------------------------------------
+MySQL JOINS
+===========
+-> MySQL JOINS are used to retrieve data from multiple tables.
+
+-> MySQL JOINS are used with SELECT statement.  
+
+-> It is performed whenever you need to fetch records from two or more tables. 
+
+-> There are three types of MySQL joins:
+    1) MySQL INNER JOIN (or simple join/ equi join)
+    2) MySQL LEFT OUTER JOIN (or LEFT JOIN)
+    3) MySQL RIGHT OUTER JOIN (or RIGHT JOIN)
+    4) Cartesian JOIN
+    5) Self JOIN
+
+create table emp(empno int(4) primary key,ename varchar(20),sal float(10,2),deptno int(2));
+
+create table dept(deptno int(2) primary key,dname varchar(20), loc varchar(20));
+
+insert into dept values(10,'Admin','Hyd');
+
+insert into dept values(20,'Accounts','Pune');
+
+insert into dept values(30,'Marketing','Bangalore');
+
+insert into dept values(40,'Sales','Kochin');
+
+insert into emp values(1,'Sunil',2500,10);
+
+insert into emp values(2,'Anil',3250.50,10);
+
+insert into emp values(3,'Sagar',2750.50,10);
+
+insert into emp values(4,'Sachin',3000,20);
+
+insert into emp values(5,'Parveen',4000,20);
+
+insert into emp values(6,'Pankaj',2700.50,50);
+
+MySQL Inner Join:
+-----------------
+The MySQL Inner Join is used to return only those results from the tables that match the specified condition and hides other rows and columns. 
+MySQL assumes it as a default Join, so it is optional to use the Inner Join keyword with the query.
+
+Syntax:
+SELECT columns FROM table1  
+	INNER JOIN table2 ON condition1  
+	INNER JOIN table3 ON condition2  
+
+mysql> select emp.empno, emp.ename, emp.sal, emp.deptno, dept.dname, dept.loc from emp, dept where emp.deptno = dept.deptno;
+
+mysql> select e.empno, e.ename, e.sal, e.deptno, d.dname, d.loc from emp e, dept d where e.deptno = d.deptno;
+
+mysql> select emp.empno,emp.ename, emp.deptno, dept.dname,dept.loc from emp INNER JOIN dept on emp.deptno=dept.deptno;
+
+MySQL Inner Join with Group By Clause
+    
+mysql> select group_concat(e.empno), group_concat(e.ename), e.sal, e.deptno, d.dname, d.loc from emp e inner join dept d on e.deptno = d.deptno group by (d.dname);
+
+MySQL Inner Join with USING clause
+-> sometimes, the name of the columns is the same in both the tables. In that case, we can use a USING keyword to access the records.
+
+mysql> select e.empno, e.ename, e.sal, e.deptno, d.dname, d.loc from emp e INNER JOIN dept d using(deptno);
+
+Inner Join with WHERE Clause
+-> the WHERE clause enables you to return the filter result. 
+mysql> select e.empno, e.ename, e.sal, e.deptno, d.dname, d.loc from emp e INNER JOIN dept d USING (deptno) WHERE deptno=10
+
+
+=> to display the dname, sum(sal) from dept and emp table
+mysql>select d.dname, SUM(e.sal) from emp e, dept d WHERE d.deptno = e.deptno GROUP BY(d.dname);
+
+mysql> select d.deptno, dname, sum(e.sal) from emp e, dept d WHERE d.deptno = e.deptno GROUP BY d.deptno, dname;
+
+
+=> to display location, no of employees, min sal, max salary of employees using equi joing
+mysql> select loc, count(*) , min(sal), max(sal) from emp e, dept d WHERE d.deptno = e.deptno GROUP BY loc;
+mysql> select loc, count(*) , min(sal), max(sal) from emp e INNER JOIN dept d USING (deptno) GROUP BY loc;
+
+
+MySQL Inner Join using Operators
+mysql> SELECT emp_id, designation, income, qualification  
+FROM employee INNER JOIN customer  
+ WHERE income>20000 and  income<80000;
+
+
+Self Join
+=========
+-> Joining a table itself is called as Self Join
+-> A SELF JOIN is a join that is used to join a table with itself.
+
+    SELECT s1.col_name, s2.col_name...  
+    FROM table1 s1, table1 s2  
+    WHERE s1.common_col_name = s2.common_col_name;  
+
+Table -> student
+student_id  name   course_id   duration
+1	    Adam	1	3
+2	    Peter	2	4
+1	    Adam	2	4
+3	    Brian	3	2
+2	    Peter	3	5
+
+=> to get all the result (student_id and name) from the table where student_id is equal, and course_id is not equal.
+mysql> SELECT  s1.student_id, s1.name  
+    FROM student AS s1, student s2  
+    WHERE s1.student_id=s2.student_id  
+    AND s1.course_id<>s2.course_id;  	
+
+=> display ename and manager name
+mysql> select e.empno,e.ename AS Employee , m.ename AS Manager from emp e, emp m where e.mgr = m.empno;
+
+
+
+OUTER JOIN
+==========
+-> Outer Join is used to retrieve all the records from one table and matching rows from another table
+
+1) MySQL LEFT JOIN
+
+-> the Left Join clause returns all the rows from the left table and matched records from the right table or returns Null if no matching record found. This Join can also be called a Left Outer Join clause. So, Outer is the optional keyword to use with Left Join.
+
+    SELECT columns FROM table1    
+    LEFT [OUTER] JOIN table2    
+    ON Join_Condition;  
+
+mysql> select e.empno,e.ename,e.sal, e.deptno,d.dname,d.loc from emp e left outer join dept d on e.deptno=d.deptno;
+mysql> select e.empno,e.ename,e.sal, e.deptno,d.dname,d.loc from emp e left join dept d on e.deptno=d.deptno;
+
+mysql> select e.empno,e.ename,e.sal, e.deptno,d.dname,d.loc from emp e left join dept d USING(deptno);
+
+mysql> select e.empno,e.ename,e.sal, e.deptno,d.dname,d.loc from emp e left join dept d USING(deptno) GROUP BY dname;
+
+2) MySQL RIGHT JOIN
+
+-> the Right Join is used to joins two or more tables and returns all rows from the right-hand table, and only those results from the other table that fulfilled the join condition. If it finds unmatched records from the left side table, it returns Null value.
+
+Syntax:
+    SELECT column_list FROM Table1  
+    RIGHT [OUTER] JOIN Table2   
+    ON join_condition; 
+
+mysql> select e.empno,e.ename,e.sal, d.deptno,d.dname,d.loc from emp e RIGHT OUTER JOIN dept d ON d.deptno=e.deptno;
+
+mysql> select e.empno,e.ename,e.sal, d.deptno,d.dname,d.loc from emp e RIGHT OUTER JOIN dept d ON d.deptno=e.deptno ORDER BY empno;
+
+3) MySQL CROSS JOIN
+
+-> MySQL CROSS JOIN is used to combine all possibilities of the two or more tables and returns the result that contains every row from all contributing tables. The CROSS JOIN is also known as CARTESIAN JOIN, which provides the Cartesian product of all associated tables. The Cartesian product can be explained as all rows present in the first table multiplied by all rows present in the second table. It is similar to the Inner Join, where the join condition is not available with this clause. 
+
+-> CROSS JOIN returns all the records where each row from the table1 is matched with each row from the table2.
+
+mysql> select empno, ename, sal, dept.deptno, dname, loc from emp CROSS JOIN dept;
+--------------------------------------------------------
+
+Procedure in MySQL
+==================
+delimiter //
+create procedure countProducts(OUT param INT)
+begin
+ select count(*) into param from product;
+end;
+//
+
+---- to call procedure
+
+delimiter ;
+call countProducts(@param);
+select @param;
+---------------------------------------------
+Procedure to add two numbers in MySQL:
+-----------------------------
+mysql> create procedure addNum(IN a INT, IN b INT, OUT c INT)
+begin
+ set c=a+b;
+end //
+
+mysql>delimiter ;
+mysql> call addNum(11,22,@s);
+mysql> select @s;
+
+---------------------------------------------
+delimiter //
+
+create procedure update_product_price(IN pid integer, IN discount integer , OUT updated_price integer) 
+begin
+  update product set productprice=productprice-discount where productid=pid;
+  select productprice into updated_price from product where productid=pid;
+end;
+//
+
+
+delimiter ;
+call update_product_price(102,100,@price);
+select @price;
+
+--------------------------------------------------------
+To create a View
+----------------
+create view myview as select e.empno,e.ename,e.sal,e.deptno,d.dname from emp e, dept d where e.deptno=d.deptno;
+
+select * from myview;
+--------------------------------------------------------
+MySQL Comments
+==============
+
+In MySQL Server, we can write the comments in mainly three ways that are given below:
+
+    Using # symbol
+    Using -- symbol
+    Using /* and */ symbol
+
+mysql> Select * FROM students; #retrieves all records
+mysql> Select * FROM students; --retrieves all records
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://www.youtube.com/watch?v=fFgdnS1laA0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
