@@ -1,0 +1,144 @@
+write a procedure to hike the salary of an employee based empno by a %   - hike_emp_salary
+in query editor---
+
+delimiter //
+create procedure hike_emp_salary(IN eid INT, IN hike INT, OUT updated_salary FLOAT)
+begin
+  update emp set sal=(sal + sal * hike /100) where empno=eid;
+  select sal into updated_salary from emp where empno=eid;
+end//
+
+
+
+package com.capgemini.java.jdbc;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Types;
+
+public class ProcedureCall {
+
+	public static void main(String[] args) throws Exception {
+		Connection con = ConnectionFactory.getDBConnection();
+		
+		CallableStatement cst = con.prepareCall("{ call hike_emp_salary(?,?,?) }");
+		
+		int empno = 101;
+		int hikePercentage = 10;
+		
+		cst.setInt(1, empno);
+		cst.setInt(2, hikePercentage);
+		
+		cst.registerOutParameter(3, Types.FLOAT);
+		
+		cst.execute();
+		
+		System.out.println(String.format("hiked salary of employee: %d is %.2f\n", empno, cst.getFloat(3)));
+		cst.close();
+		con.close();
+	}
+
+}
+
+---------------------------------------------------------------
+Metadata ---
+java.sql.ResultSetMetaData - to get the details of a ResultSet
+
+public class RSMetaData {
+
+	public static void main(String[] args) throws Exception {
+		Connection con = ConnectionFactory.getDBConnection();
+		Statement st = con.createStatement();
+		
+		String sql = "select * from emp";
+		
+		ResultSet rs = st.executeQuery(sql);
+		
+		ResultSetMetaData rsmd = rs.getMetaData();
+		
+		System.out.println("no of coloumns = " + rsmd.getColumnCount());
+		System.out.println(Types.INTEGER + " - " + Types.FLOAT);
+		
+		for(int i=1; i<=rsmd.getColumnCount(); i++) {
+			String columnName = rsmd.getColumnName(i);
+			int columnType = rsmd.getColumnType(i);
+			String colTypeName = rsmd.getColumnTypeName(i);
+			String colClassName = rsmd.getColumnClassName(i);
+			
+			String columnDetails = String.format("%-2d %-10s %-2d %-10s %-20s", i, columnName, columnType, colTypeName, colClassName);
+			System.out.println(columnDetails);
+			Thread.sleep(2000);
+		}
+		
+		rs.close();
+		con.close();
+	}
+
+}
+
+cmd>javap java.sql.ResultSetMetaData
+
+------------------- java.sql.DatabaseMetaData --------
+to get the details of the connected database and also to get the details of JDBC Driver used for connection
+
+
+		Connection con = ConnectionFactory.getDBConnection();
+		DatabaseMetaData dbmd = con.getMetaData();
+		
+		System.out.println(dbmd.getDatabaseProductName());
+		System.out.println(dbmd.getDatabaseProductVersion());
+		
+		System.out.println(dbmd.getDriverName());
+		System.out.println(dbmd.getDriverVersion());
+		
+		System.out.println(dbmd.getSQLKeywords());
+		System.out.println();
+		System.out.println(dbmd.getTimeDateFunctions());
+		System.out.println();
+		System.out.println(dbmd.getStringFunctions());
+		con.close();
+
+cmd> java.sql.DatabaseMetaData
+
+
+------------------ Transaction Management with Batch Execution of Query --------
+
+		Connection con = ConnectionFactory.getDBConnection();
+		Statement st = con.createStatement();
+		
+		con.setAutoCommit(false);
+		
+		st.addBatch("insert into emp values(110, 'user-1', 2500)");
+		st.addBatch("insert into emp values(111, 'user-2', 3500)");
+		//st.addBatch("insert into emp values(111, 'user-3', 4500)");
+		st.addBatch("insert into emp values(112, 'user-3', 4500)");
+		st.addBatch("update emp set sal = 3250.5 where empno >= 110");
+		
+		try {
+			int[] rowsAffected = st.executeBatch();
+			for(int n : rowsAffected) {
+				System.out.println(n);
+			}
+			
+			con.commit();
+		}catch(Exception ex) {
+			System.out.println(ex);
+			con.rollback();
+		}
+		st.close();
+		con.close();
+
+
+------------ Working with RowSets ------------
+JdbcRowSet
+CachedRowSet
+WebRowSet
+JoinRowSet
+
+
+
+
+
+
+
+
