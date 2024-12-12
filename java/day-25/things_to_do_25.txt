@@ -1,0 +1,18 @@
+1. create a spring boot application  using Spring Initializr
+   start.spring.io
+ => import the project to eclipse
+ => check the folder structure
+ => Debug SpringApplication.run(...) method -- to understand the internal working of Spring Boot
+ => identify the number of beans created
+ => display the bean names
+ => understand @SpringBootApplication
+
+@SpringBootApplication =   @SpringBootConfiguration +    @ComponentScan +    @EnableAutoConfiguration
+
+
+2. setup Spring Tool Suite IDE
+
+3. create a spring boot application using STS
+ File > New> Spring Starter Project
+
+
