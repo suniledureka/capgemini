@@ -1,0 +1,21 @@
+1. Access the bean (component , bean) from the Spring IoC
+2. check different attributes of @Component & @Bean
+3. @Value
+4. @ConfigurationProperties , prefix, @PropertySource
+
+5. Dependency injections - setter, constructor, field  -- comparisons
+
+6. autowiring -- Engine, DieselEngine, Petrol  @Primary, @Qualifier
+
+7. @DependsOn
+
+8. working with Banner --- console, off, log,   src/main.resoources/banner.txt   ascii text
+			logging  
+#spring.main.banner-mode=console
+#spring.main.banner-mode=off
+
+logging.file.name=logs/myapp.log
+spring.main.banner-mode=log
+
+
+9. profiles in spring boot application 

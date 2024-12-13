@@ -1,0 +1,66 @@
+2024-12-13T10:50:53.324+05:30  INFO 7440 --- [09.sb-banner] [main] o.s.boot.SpringApplication               : 
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+[32m :: Spring Boot :: [39m              [2m (v3.4.0)[0;39m
+
+
+2024-12-13T10:50:53.367+05:30  INFO 7440 --- [09.sb-banner] [main] com.capgemini.boot.Application           : Starting Application using Java 21.0.4 with PID 7440 (C:\capgemini\spring\boot\core\09.sb-banner\target\classes started by Sunil Joseph in C:\capgemini\spring\boot\core\09.sb-banner)
+2024-12-13T10:50:53.368+05:30  INFO 7440 --- [09.sb-banner] [main] com.capgemini.boot.Application           : No active profile set, falling back to 1 default profile: "default"
+2024-12-13T10:50:53.811+05:30  INFO 7440 --- [09.sb-banner] [main] com.capgemini.boot.Application           : Started Application in 0.806 seconds (process running for 1.443)
+2024-12-13T10:52:02.078+05:30  INFO 15200 --- [09.sb-banner] [main] o.s.boot.SpringApplication               : 
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+[32m :: Spring Boot :: [39m              [2m (v3.4.0)[0;39m
+
+
+2024-12-13T10:52:02.122+05:30  INFO 15200 --- [09.sb-banner] [main] com.capgemini.boot.Application           : Starting Application using Java 21.0.4 with PID 15200 (C:\capgemini\spring\boot\core\09.sb-banner\target\classes started by Sunil Joseph in C:\capgemini\spring\boot\core\09.sb-banner)
+2024-12-13T10:52:02.123+05:30  INFO 15200 --- [09.sb-banner] [main] com.capgemini.boot.Application           : No active profile set, falling back to 1 default profile: "default"
+2024-12-13T10:52:02.568+05:30  INFO 15200 --- [09.sb-banner] [main] com.capgemini.boot.Application           : Started Application in 0.796 seconds (process running for 1.447)
+2024-12-13T10:53:31.541+05:30  INFO 16172 --- [09.sb-banner] [main] o.s.boot.SpringApplication               : 
+
+
+
+          Spring Boot Dependency Injection
+          
+          
+          
+          
+
+2024-12-13T10:53:31.589+05:30  INFO 16172 --- [09.sb-banner] [main] com.capgemini.boot.Application           : Starting Application using Java 21.0.4 with PID 16172 (C:\capgemini\spring\boot\core\09.sb-banner\target\classes started by Sunil Joseph in C:\capgemini\spring\boot\core\09.sb-banner)
+2024-12-13T10:53:31.589+05:30  INFO 16172 --- [09.sb-banner] [main] com.capgemini.boot.Application           : No active profile set, falling back to 1 default profile: "default"
+2024-12-13T10:53:32.022+05:30  INFO 16172 --- [09.sb-banner] [main] com.capgemini.boot.Application           : Started Application in 0.798 seconds (process running for 1.439)
+2024-12-13T10:55:13.571+05:30  INFO 21740 --- [09.sb-banner] [main] o.s.boot.SpringApplication               :                                                   
+                                                  
+                                                  
+                                                  
+ _____                                  _       _ 
+/  __ \                                (_)     (_)
+| /  \/ __ _ _ __   __ _  ___ _ __ ___  _ _ __  _ 
+| |    / _` | '_ \ / _` |/ _ \ '_ ` _ \| | '_ \| |
+| \__/\ (_| | |_) | (_| |  __/ | | | | | | | | | |
+ \____/\__,_| .__/ \__, |\___|_| |_| |_|_|_| |_|_|
+            | |     __/ |                         
+            |_|    |___/                          
+            ___________      ____   _______       
+           /  ___| ___ \_   / /  | |  _  \ \      
+           \ `--.| |_/ (_) | |`| | | |/' || |     
+            `--. \ ___ \   | | | | |  /| || |     
+           /\__/ / |_/ /_  | |_| |_\ |_/ /| |     
+           \____/\____/(_) | |\___(_)___/ | |     
+                            \_\          /_/      
+                                                  
+                                                  
+
+2024-12-13T10:55:13.608+05:30  INFO 21740 --- [09.sb-banner] [main] com.capgemini.boot.Application           : Starting Application using Java 21.0.4 with PID 21740 (C:\capgemini\spring\boot\core\09.sb-banner\target\classes started by Sunil Joseph in C:\capgemini\spring\boot\core\09.sb-banner)
+2024-12-13T10:55:13.608+05:30  INFO 21740 --- [09.sb-banner] [main] com.capgemini.boot.Application           : No active profile set, falling back to 1 default profile: "default"
+2024-12-13T10:55:13.949+05:30  INFO 21740 --- [09.sb-banner] [main] com.capgemini.boot.Application           : Started Application in 0.649 seconds (process running for 1.137)
