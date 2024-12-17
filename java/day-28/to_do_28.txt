@@ -1,0 +1,16 @@
+YAML - Yet Another Markup Language
+
+spring:
+  application:
+  datasource:
+  jpa:
+    show-sql: true
+
+
+-> finders  
+-> custom query using @Query with HQL and Native SQL
+-> JpaRepository
+-> CurdRepository vs JpaRepository
+-> Sorting - 2 approaches
+-> Pagination
+
