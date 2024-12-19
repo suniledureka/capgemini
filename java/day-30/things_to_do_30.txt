@@ -1,0 +1,16 @@
+Library Rest Controller
+
+http://localhost:8080/library/books
+http://localhost:8080/library/book?bid=xxxx
+http://localhost:8080/library/book/{bid}
+
+
+add a new book by sending data as either json/ xml
+POST - http://localhost:8080/library/book
+
+modify an existing book in repo
+PUT - http://localhost:8080/library/book/{bid}
+					update Book as JSON or XML
+
+delete a book based on book ID
+DELETE - http://localhost:8080/library/book/{bid}
