@@ -1,0 +1,91 @@
+=> Global Exception Handling
+@Controller Vs @ControllerAdvice
+@RestControoller Vs @RestControllerAdvice
+@ExceptionHandler
+
+=> Validations
+https://medium.com/@himani.prasad016/validations-in-spring-boot-e9948aa6286b
+
+=> Swagger Integration
+
+<dependency>
+ <groupId>org.springdoc</groupId>
+ <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+ <version>2.7.0</version>
+</dependency>
+
+http://localhost:8080/swagger-ui.html
+
+--- Annotations ---
+@SpringBootApplication
+@OpenAPIDefinition(info = @Info(title = "IRCTC TICKET APP", 
+				version = "2.0", 
+				description = "Ticket Booking Application",
+				contact = @Contact(
+						name = "Sunil Joseph", 
+						email = "sunil.j@example.com")))
+public class Application {
+
+
+-- controller class---
+@RestController
+@RequestMapping("/irctc")
+@Tag(name = "Ticket Booking Controller", description = "New Booking, Search, Cancel, Reschedule Ticket")
+public class TicketRestController {
+
+
+
+	@PostMapping(value = "/ticket", 
+			consumes = { "application/xml", "application/json" }, 
+			produces = { "application/xml", "application/json" })
+	
+	@Operation(summary = "New Ticket Booking",
+    		 description = "booking a new train ticket based on passenger info")
+
+	public ResponseEntity<?> newTicketBooking(@Valid @RequestBody Passenger passenger) {
+		// --logic to generate the ticket for passenger and to save in DB
+
+
+--- DTO ----
+Data
+@RequiredArgsConstructor
+@AllArgsConstructor
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+@Schema(name = "Passenger", description = "Schema to hold passenger information")
+public class Passenger {
+	//@NotNull
+	@NotNull(message = "required")
+	//@NotEmpty(message = "should not be empty")
+	@NotBlank(message = "should not be empty")
+	@Schema(description = "Name of the passenger", example = "Sunil Joseph" )
+	private String passengerName;
+	
+	@NotNull(message = "required")
+	@NotBlank(message = "fromStation should not be blank")
+	@Size(min = 3, message = "should be min 3 char length")
+	@Schema(description = "fromStation of travel, min 3 chars", example = "Hyderabad" )
+	private String fromStation;
+	
+	@Size(min = 3, message = "should be min 3 char length")
+	private String toStation;
+	
+	@NotNull
+	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+	@Future(message = "travel date should be after ")
+	private LocalDate dateOfJourney;
+	
+	@NotNull
+	@Size(min = 4, max = 6, message = "trainNo should be b/w 4 to 6 chars")
+	private String trainNo;
+}
+
+
+--- in application.properties ----
+springdoc.swagger-ui.path=/irctc
+
+
+http://localhost:8080/irctc
+
+--- Swagger Hub ----
+
