@@ -1,0 +1,32 @@
+1. Method Level Authorization
+@PreAuthorize
+
+2. OAuth 2.0
+OAuth 2.0, which stands for "Open Authorization", is a standard designed to allow a website or application to access resources hosted by other web apps on behalf of a user. I
+t replaced OAuth 1.0 in 2012 and is now the de facto industry standard for online authorization.
+
+Dependencies : Spring Web, OAuth2 Client
+
+3. JWT (JOT)  JSON Web Token
+
+Basic Authentication Vs JWT
+
+Basic Authentication
+  - No Expiration Time
+  - No User Details - what authorizations does a user have
+  - Easily Decoded
+
+How about a custom token system?
+  - Custom Structure
+  - Possible Security Flaws
+  - Service Provider & Service Consumer should understand
+
+JWT (Json Web Token)
+  - Open, industry standard for representing claims securely between two parties
+  - Can Contain User Details and Authorizations
+
+
+
+Dependencies: Spring Web, Spring Security, jjwt-api, jjwt-impl, jjwt-jackson
+
+
