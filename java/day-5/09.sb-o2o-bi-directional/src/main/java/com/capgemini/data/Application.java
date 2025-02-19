@@ -1,0 +1,54 @@
+package com.capgemini.data;
+
+import java.util.Optional;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.capgemini.data.entities.Applicant;
+import com.capgemini.data.repositories.ApplicantRepository;
+import com.capgemini.data.repositories.ResumeRepository;
+
+@SpringBootApplication
+public class Application implements CommandLineRunner{
+	private ApplicantRepository applicantRepo;
+	private ResumeRepository resumeRepo;
+	
+	public Application(ApplicantRepository applicantRepo, ResumeRepository resumeRepo) {
+		super();
+		this.applicantRepo = applicantRepo;
+		this.resumeRepo = resumeRepo;
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		/*
+		Applicant applicant = new Applicant();
+		
+		applicant.setId(101L);
+		applicant.setName("Praveen");
+		applicant.setEmail("praveen@gmail.com");
+		applicant.setPhone("9848586878");
+		
+		Resume resume = new Resume();
+		resume.setContents("Praveen\'s Resume Data");
+		resume.setApplicant(applicant);
+		applicant.setResume(resume);
+		
+		applicantRepo.save(applicant);	
+		*/
+		
+		Optional<Applicant> optApplicant = applicantRepo.findById(101L);
+		if(optApplicant.isPresent()) {
+			Applicant applicant = optApplicant.get();
+			System.out.println(applicant.getId() + " - " + applicant.getName()+" - "+applicant.getResume().getContents());
+			//System.out.println(applicant);
+		}
+	}
+
+}
