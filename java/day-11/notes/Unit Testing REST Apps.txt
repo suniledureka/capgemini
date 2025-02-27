@@ -1,0 +1,191 @@
+=====================================================
+Unit Testing in Spring Boot with JUnit 5 and Mockito
+=====================================================
+
+Application development is never completed without you write unit testing inside your application and cover your entire codebase inside unit testing in order to make your code robust 
+
+Unit Testing is a way to test smallest part of your code, such as individual methods, or classes, to ensure they work as expected
+
+
+Why Unit Testing is important?
+
+1. Fast Feedback - Unit Tests are quick to run and can immediately tell you if something is broken
+2. Early bug detection - catch bugs at the method level before they propagate
+3. Easier to maintain - they help ensure future changes don't break existing functionality
+4. Increase confidence- you can refactor your code with the confidence that everything still works.
+
+
+Unit Testing Controller
+
+--- User.java ----
+
+@Entity
+@Data
+@Table(name = "USER_DTLS")
+public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String username;
+	private String password;
+	private String role;
+}
+
+--- UserRepository.java ----
+
+--- RegistrationController.java ----
+
+@RestController
+@AllArgsConstructor
+public class RegistrationController {
+	
+    private UserRepository userRepo;
+	
+    @PostMapping("/register/user")
+    public User createUser(@RequestBody User user) {       
+        return userRepo.save(user);
+    }
+}
+
+-- RegistrationControllerTest.java ----
+
+@AutoConfigureMockMvc - Annotation that can be applied to a test class to enable and configure auto-configuration of MockMvc
+
+MockMvc - MockMvc is a mocked servlet environment that we can use to test our HTTP controller endpoints without the need to launch our embedded servlet container. 
+While MockMvc is a mocked environment, it still comes with HTTP semantics so that we can test the serialization, HTTP status codes, and return types of our endpoints
+Main entry point for server-side Spring MVC test support.
+
+@SpringBootTest - this annotation can be used as an alternative to the standard spring-test @ContextConfiguration annotation when you need Spring Boot features. The annotation works by creating the ApplicationContext used in your tests through SpringApplication .
+
+
+@SpringBootTest
+@AutoConfigureMockMvc
+class RegistrationControllerTest {
+	@Autowired
+	private MockMvc mockMvc;
+	
+	@Autowired
+	private ObjectMapper objectMapper;
+	
+	@Test
+	void testCreateUser_validUser() throws Exception {
+		var user = new User();
+		user.setUsername("praveen");
+		user.setPassword("password123#");
+		user.setRole("ROLE_ADMIN");
+		
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/register/user")
+					.contentType(MediaType.APPLICATION_JSON)
+					.content(objectMapper.writeValueAsString(user))
+				)
+			.andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.jsonPath("$.username").value("praveen"))
+			.andExpect(MockMvcResultMatchers.jsonPath("$.password").value(Matchers.not("praveen")))
+			.andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
+			.andExpect(MockMvcResultMatchers.jsonPath("$.role").exists());		
+	}
+}
+
+
+case 2:
+	@Test
+	void testCreateUser_UserWithoutPassword() throws Exception {
+		var user = new User();
+		user.setUsername("praveen");
+		//user.setPassword("password123#");
+		user.setRole("ROLE_ADMIN");
+		
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/register/user")
+					.contentType(MediaType.APPLICATION_JSON)
+					.content(objectMapper.writeValueAsString(user))
+				)
+			.andExpect(MockMvcResultMatchers.status().isInternalServerError());		
+	}
+
+
+in RegistrationController
+
+    @ExceptionHandler(value = NullPointerException.class)
+    public ResponseEntity<?> handleException(Exception exp){
+    	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+    			     .body(new ServerErrorException("NPE", exp));
+    }
+
+
+-- to cleanup db changes of test cases
+
+	@Autowired
+	private UserRepository userRepo;
+
+	@AfterEach
+	public void cleanup() {
+		userRepo.deleteAll();
+	}
+
+-- to make use of in-memory database H2 for testing
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>test</scope>
+</dependency>
+
+--- src/test/resources/application.properties ---
+
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+
+
+
+PRACTICALS
+ecomm application
+
+1. Unit Test for ProductService
+
+@ExtendsWith(MockitoExtension.class)
+public class ProductServiceTest{
+ @Mock
+ ProductRepository productRepository
+
+ //@Mock
+ @InjectMocks
+ ProductService productService;
+
+ @Test
+ void testAddProductShouldAddProductSuccessfully(){
+   //--- part-1 of segregation - data preparation ---
+   Product product = new Product();
+   product.setId(1);
+   product.setName("Book");
+   product.setPrice(100);
+
+  //--- part-2 of segregation - mocking your calls ---
+
+Mockito.when(productRepository.save(product)).thenReturn(product);
+
+  //--- part-3 of segregation - calling actual methods---
+   Product addedProduct = productService.addProduct(product);
+   
+  //--- part-4 of segregation - assertions ---
+   Assertions.assertEquals(product.getId(), addedProduct.getId());
+   Assertions.assertEquals(2, addedProduct.getId()); //failed scenario
+   Assertions.assertNotNull(addedProduct);
+   Assertions.assertEquals(product.getName(), addedProduct.getName()); 
+   Assertions.assertTrue(addedProduct.getId()==1); 
+ }
+}
+
+
+@Test
+public void deleteProductShouldDeleteProductSuccessfully(){
+  Mockito.doNothing().when(productRepository).deleteById(1);
+  productService.deleteProduct(1);
+  Mockito.verify(productRepository, times(1)).deleteById(1);
+}
+
+
