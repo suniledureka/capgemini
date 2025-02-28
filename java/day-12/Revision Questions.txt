@@ -1,0 +1,74 @@
+JVM Components,
+Java Compiler 
+Basic OOPS
+Polymorphism 
+Functional interfaces and it uses
+Predefined functional interfaces.
+Hashcode vs equals method  ------- contract between hashCode() and equals()
+Why static variables 
+
+Prepared statement vs Callable Statement 
+
+Comparable vs Comparator with examples
+
+
+Scenario based questions on Comparator and comparable 
+Additionally basic questions like advantages of microservices 
+What is eureka server 
+Monolithic vs microservices
+
+Constructors
+Constructor Chaining
+Method overloading and  method overriding 
+Collection -set
+Array sorting- coding (without API)
+Comparable/ Comparator
+JpaRepository
+
+Write one interface? 
+Can we do method overloading and constructor overloading in interface? 
+
+What is collection what are interfaces in collection? 
+Can you write code using stream
+If u have to find employee where City=pune using stream
+Diff between Stringbuffer stringbuilder? 
+Java 8 features
+What is spring
+ Spring features
+What are spring objects?
+
+What is abstract and interface and its importance?
+What is polymorphism and how it can be achieved in program?
+Write two types of polymorphism?
+Stream 8 questions find even,odd ,positive and negative 
+Array questions
+Diff between array and arraylist
+What is hashset and hashmap
+What is Functional Interface
+And whats difference between simple interface and functional interface
+Which class same work as NullPointerException?
+In exception which keyword propogate exception
+
+What are the access modifiers
+Difference between public and protected 
+Difference between protected and default
+What are interfaces
+What is meant by abstract class
+Is method overloading possible in interface 
+Is constructor overloading possible in interfaces
+Difference between abstract class and interface
+What is method overloading  and method overriding
+Features  of java 8
+What are lambda function 
+Why we use lambda functions
+Is it possible to pass parameters in lambda functions
+Write the syntax of lambda functions 
+What is meant by functional interface 
+Do you have any idea about in built  functional interface
+Tell me more about comparable and comparator 
+What are the java keywords used in exception 
+Difference between throw and throws
+Is it possible to write try without catch and try without finally 
+What are the collections in java
+Difference between arraylist and linkedlist
+
