@@ -1,0 +1,190 @@
+Gateway, Routing & Cross cutting concerns in Microservices
+==========================================================
+
+What are the challenges that we may face while we are trying to accept the external traffic into our microservices network.
+
+We should have a single entry point into our microservice network; we should not allow different external clients talking with our microservices directly - instead we should have a single entry point into our microservices by using the products like API Gateway.
+
+What are the challenges that we may face while we are trying to accept the external communication into our microservice?
+
+Challenge # 6
+
+1) How do we maintain a single entry point into microservices network?
+    here the question is - what is the problem if we don't maintain a single entry point; what if I allow all the external clients to communicate directly with my microservices; there will be multiple drawbacks or challenges not maintaining a single entry point to our microservice network
+  if we are not having a single entry point - then the external clients should maintain a track of all the microservices inside our microservice network, their endpoint URLs , port numbers, 
+ 
+    how do we build a single gatekeeper for all the inbound traffic to our microservices. This way the client does not need to keep track of the different services involved in a transaction, simplifying the client's logic
+
+2) How do we handle cross cutting concerns
+     logging, auditing, tracing & security
+
+3) How do we route based on custom requirements?
+     how to provide dynamic routing capabilities which allows to define routing rules based on various criteria such as HTTP headers (version1, v2), request parameters etc inside microservices network
+
+Solution:
+these challenges in microservices can be solved using - Edge Server / API Gateway / Gateway - this server will be sitting on the edge of the microservice network and monitoring all the incoming and outgoing requests 
+
+
+----- Why we need a Edge Server or API Gateway inside microservices ------------
+
+cross cutting concerns  -- non functional requirements
+
+inside API Gateway -  we can perform many functionalities
+-> Request Validation
+-> Include & Exclude List - to perform some checks related to black listing or white listing of the IP address 
+-> Authentication & Authorization
+-> Rate Limit - we can limit the quantity of requests or the amount of requests coming from a particular client 
+-> Dynamic Routing
+-> Service Discovery
+-> Modify Request & Response
+-> Protocol Conversion
+
+we can also handle negative scenarios like
+-> implementing Exception Handling
+-> implementing Circuit breaker to make our microservices fault tolerent and resilient in nature
+
+API gateway is also capable of sending all the Logging & monitoring related informations - with tools like Grafana - using this we look for all the logs and errors  or monitoring related informations using beautiful dashboards
+
+If we needed we can also integrate API Gateway with Rediscache - which means we can write some business logic by leveraging the cache that we can store inside this redis component
+
+eureka sever is for service discovery and registration - which is entirely a different pattern. eureka server is not capable of performing all the non-functional requirements or implementing cross-cutting concerns
+
+---------- Spring Cloud Gateway --------------
+
+
+Spring Reactor & Spring WebFlux ---> Spring Reactive Programming
+
+spring.io > Projects > Spring Cloud > Spring Cloud Gateway
+
+
+---------- Spring Cloud Gateway Internal Architecture  --------------
+
+spring.io > Projects > Spring Cloud > Spring Cloud Gateway > Learn
+
+
+---------- Building Edge Server using Spring Cloud Gateway --------------
+gatewayserver
+Edge Server for CapGemBank microservices
+com.capgemini.gatewayserver
+
+Dependencies: 
+Reactive Gateway, 
+Eureka Discovery Client (to connect to the eureka server and to fetch the service registry details of all the other microservices) , 
+Spring Boot Actuator
+Spring Boot DevTools
+
+-- application.yml ----  (from accounts ms and make corrections)
+
+server:
+  port: 8072
+spring:
+  application:
+    name: GATEWAYSERVER 
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      access: unrestricted
+
+spring.cloud.gateway.discovery.locator.enabled: true  ----> we are telling to gateway server to connect with the discovery server (eureka) and locate all the details about the microservices - once it locates all the informations about the individual microservices - we want the gateway server to use the same to forward the traffic from external client to the individual microservice 
+
+
+
+----> Edge Server with default routing configs
+
+
+http://localhost:8761/ ---> eureka server
+
+http://localhost:8072/actuator
+
+http://localhost:8072/actuator/gateway/routes
+
+postman
+POST   http://localhost:8072/ACCOUNTS-MS/api/create
+
+ACCOUNTS-MS ---> name of ms in eureka server
+api/create ---> actual path
+
+GET http://localhost:8072/ACCOUNTS-MS/api/fetch?mobileNumber= xxxxx
+
+same way access loans and cards
+
+http://localhost:8072/LOANS-MS/api/create
+
+
+---- make changes inside Gateway server to accept service names with lower case ----
+POST   http://localhost:8072/accounts-ms/api/create
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true 
+          lower-case-service-id: true
+	  						lowerCaseServiceId: true
+
+
+PART-2
+
+------ Implementing Custom Routing using Spring Cloud Gateway ------
+
+custom requirement --> suppose we want to make the clients to send a request to 
+http://localhost:8072/cgbank/accounts-ms/api/create   
+http://localhost:8072/cgbank/loans-ms/api/create 
+http://localhost:8072/cgbank/accounts-ms/api/create 
+
+--- like dynamic routing --- define our own routing configurations -- not the default routing configurations
+
+
+in bootstrap class
+
+	@Bean
+	public RouteLocator CgBankRouteConfig(RouteLocatorBuilder routeLocatorBuilder) {
+	 return routeLocatorBuilder.routes()
+				.route(p -> p
+					     .path("/cgbank/accounts-ms/**")
+					     .filters( f -> f.rewritePath("/cgbank/accounts-ms/(?<segment>.*)","/${segment}"))
+					.uri("lb://ACCOUNTS-MS")) 
+
+				.route(p -> p
+					     .path("/cgbank/loans-ms/**")
+					     .filters( f -> f.rewritePath("/cgbank/loans-ms/(?<segment>.*)","/${segment}"))
+					.uri("lb://LOANS-MS")) 
+
+				.route(p -> p
+					     .path("/cgbank/cards-ms/**")
+					     .filters( f -> f.rewritePath("/cgbank/cards-ms/(?<segment>.*)","/${segment}"))
+					.uri("lb://CARDS-MS")) 
+
+		.build();			
+	}
+run the application 
+
+http://localhost:8072/cgbank/accounts-ms/api/create   
+
+
+---> check  http://localhost:8072/actuator/gateway/routes
+
+-- we can see the default configurations also - to disable the default behaviour
+spring.cloud.gateway.discovery.locator.enabled: false
+
+---> check  http://localhost:8072/actuator/gateway/routes
+
